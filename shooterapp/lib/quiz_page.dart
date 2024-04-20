@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 class QuizPage extends StatefulWidget {
   final String category;
@@ -10,42 +12,19 @@ class QuizPage extends StatefulWidget {
 }
 
 class _QuizPageState extends State<QuizPage> {
-  int _currentQuestionIndex = 0;
+  PageController _pageController = PageController();
+  double _currentQuestionIndex = 0; // Changed to double to work with Slider
   int? _selectedAnswerIndex;
   bool _isAnswerSelected = false;
 
   List<Map<String, dynamic>> get questions =>
       _getQuestionsForCategory(widget.category);
 
-  void _nextQuestion() {
-    setState(() {
-      if (_currentQuestionIndex < questions.length - 1) {
-        _currentQuestionIndex++;
-        _isAnswerSelected = false; // Reset the animation
-        _selectedAnswerIndex = null; // Reset selection for the next question
-      }
-    });
-  }
-
-  void _previousQuestion() {
-    setState(() {
-      if (_currentQuestionIndex > 0) {
-        _currentQuestionIndex--;
-        _isAnswerSelected = false; // Reset the animation
-        _selectedAnswerIndex =
-            null; // Reset selection for the previous question
-      }
-    });
-  }
-
   void _selectAnswer(int index) {
-    if (!_isAnswerSelected) {
-      // To prevent re-selection during the animation
-      setState(() {
-        _selectedAnswerIndex = index;
-        _isAnswerSelected = true;
-      });
-    }
+    setState(() {
+      _selectedAnswerIndex = index;
+      _isAnswerSelected = true;
+    });
   }
 
   List<Map<String, dynamic>> _getQuestionsForCategory(String category) {
@@ -606,10 +585,23 @@ class _QuizPageState extends State<QuizPage> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    final double cmToPixels =
-        2 * MediaQuery.of(context).devicePixelRatio * 37.795275591;
+  void initState() {
+    super.initState();
+    _pageController.addListener(() {
+      setState(() {
+        _currentQuestionIndex = _pageController.page!;
+      });
+    });
+  }
 
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Quiz: ${widget.category}'),
@@ -617,102 +609,92 @@ class _QuizPageState extends State<QuizPage> {
       body: Column(
         children: <Widget>[
           Expanded(
-            flex: 5,
-            child: ListView(
-              children: <Widget>[
-                Container(
-                  padding: EdgeInsets.all(16),
-                  margin: EdgeInsets.symmetric(vertical: 8, horizontal: 20),
-                  decoration: BoxDecoration(
-                    color: Colors.yellow[100],
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.5),
-                        spreadRadius: 5,
-                        blurRadius: 7,
-                        offset: Offset(0, 3),
-                      ),
-                    ],
-                  ),
-                  child: Text(
-                    questions[_currentQuestionIndex]['question'],
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                  ),
-                ),
-                ...questions[_currentQuestionIndex]['answers']
-                    .asMap()
-                    .entries
-                    .map<Widget>((entry) {
-                  int idx = entry.key;
-                  var answer = entry.value;
-                  return InkWell(
-                    onTap: () => _selectAnswer(idx),
-                    child: AnimatedContainer(
-                      duration: Duration(milliseconds: 500),
-                      curve: Curves.easeInOut,
-                      decoration: BoxDecoration(
-                        color: _selectedAnswerIndex == idx
-                            ? (answer['isCorrect']
-                                ? Colors.green
-                                    .withOpacity(_isAnswerSelected ? 1 : 0)
-                                : Colors.red
-                                    .withOpacity(_isAnswerSelected ? 1 : 0))
-                            : Colors.white,
-                        borderRadius: BorderRadius.circular(10),
-                        border:
-                            Border.all(color: Colors.black.withOpacity(0.2)),
-                      ),
-                      margin: EdgeInsets.symmetric(vertical: 4, horizontal: 20),
-                      padding:
-                          EdgeInsets.symmetric(vertical: 12, horizontal: 20),
-                      child: ListTile(
-                        title: Text(answer['text']),
-                        leading: Radio(
-                          value: idx,
-                          groupValue: _selectedAnswerIndex,
-                          onChanged: (int? value) {},
-                        ),
-                      ),
-                    ),
-                  );
-                }).toList(),
-              ],
+            child: PageView.builder(
+              controller: _pageController,
+              itemCount: questions.length,
+              itemBuilder: (context, index) {
+                return buildQuestionPage(questions[index], index);
+              },
             ),
           ),
-          Padding(
-            padding: EdgeInsets.only(bottom: cmToPixels),
-            child: Align(
-              alignment: Alignment.bottomCenter,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  ElevatedButton(
-                    onPressed: _previousQuestion,
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Color.fromARGB(255, 247, 82, 70),
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 30, vertical: 20),
-                      textStyle: TextStyle(fontSize: 20),
-                      shadowColor: Colors.black,
-                      elevation: 10,
-                    ),
-                    child: Text('Previous'),
-                  ),
-                  ElevatedButton(
-                    onPressed: _nextQuestion,
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color.fromARGB(255, 36, 230, 43),
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 40, vertical: 20),
-                      textStyle: TextStyle(fontSize: 20),
-                      shadowColor: Colors.black,
-                      elevation: 10,
-                    ),
-                    child: Text('Next'),
+          Slider(
+            value: _currentQuestionIndex,
+            min: 0,
+            max: (questions.length - 1).toDouble(),
+            divisions: questions.length,
+            label: '${_currentQuestionIndex.round() + 1}',
+            onChanged: (value) {
+              setState(() {
+                _currentQuestionIndex = value;
+                _pageController.animateToPage(
+                  value.round(),
+                  duration: Duration(milliseconds: 300),
+                  curve: Curves.easeInOut,
+                );
+              });
+            },
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget buildQuestionPage(Map<String, dynamic> question, int index) {
+    return Container(
+      padding: EdgeInsets.all(16),
+      child: Column(
+        children: <Widget>[
+          Container(
+            child: Container(
+              padding: EdgeInsets.all(16),
+              margin: EdgeInsets.symmetric(vertical: 8, horizontal: 20),
+              decoration: BoxDecoration(
+                color: Colors.yellow[100],
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.5),
+                    spreadRadius: 5,
+                    blurRadius: 7,
+                    offset: Offset(0, 3),
                   ),
                 ],
               ),
+              child: Text(
+                question['question'],
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
             ),
+          ),
+          Column(
+            children: question['answers'].map<Widget>((answer) {
+              int idx = question['answers'].indexOf(answer);
+              return InkWell(
+                onTap: () => _selectAnswer(idx),
+                child: AnimatedContainer(
+                  duration: Duration(milliseconds: 300),
+                  curve: Curves.easeInOut,
+                  decoration: BoxDecoration(
+                    color: _selectedAnswerIndex == idx && _isAnswerSelected
+                        ? (answer['isCorrect'] ? Colors.green : Colors.red)
+                        : Colors.white,
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(color: Colors.black.withOpacity(0.2)),
+                  ),
+                  margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                  padding: EdgeInsets.symmetric(vertical: 12, horizontal: 20),
+                  child: ListTile(
+                    title: Text(answer['text']),
+                    leading: Radio(
+                      value: idx,
+                      groupValue: _selectedAnswerIndex,
+                      onChanged: (int? value) {
+                        _selectAnswer(idx);
+                      },
+                    ),
+                  ),
+                ),
+              );
+            }).toList(),
           ),
         ],
       ),
