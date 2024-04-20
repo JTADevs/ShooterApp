@@ -11,37 +11,59 @@ class QuizPage extends StatefulWidget {
 
 class _QuizPageState extends State<QuizPage> {
   int _currentQuestionIndex = 0;
+  int? _selectedAnswerIndex;
+
   List<Map<String, dynamic>> get questions =>
       _getQuestionsForCategory(widget.category);
 
-  void _answerQuestion() {
+  void _nextQuestion() {
     setState(() {
-      _currentQuestionIndex++;
+      if (_currentQuestionIndex < questions.length - 1) {
+        _currentQuestionIndex++;
+        _selectedAnswerIndex = null; // Reset selection for the next question
+      }
+    });
+  }
+
+  void _previousQuestion() {
+    setState(() {
+      if (_currentQuestionIndex > 0) {
+        _currentQuestionIndex--;
+        _selectedAnswerIndex =
+            null; // Reset selection for the previous question
+      }
+    });
+  }
+
+  void _selectAnswer(int index) {
+    setState(() {
+      _selectedAnswerIndex = index;
+      // Optionally delay moving to the next question
+      Future.delayed(Duration(seconds: 1), () {
+        if (_currentQuestionIndex < questions.length - 1) {
+          _nextQuestion();
+        }
+      });
     });
   }
 
   List<Map<String, dynamic>> _getQuestionsForCategory(String category) {
-    // Assuming that each category could potentially have different sets of questions.
-    // Here, we populate only for "Ustawa o broni i amunicji".
+    // Example category questions added here
     if (category == "Ustawa o broni i amunicji") {
       return [
         {
-          "question": "Bronią, w rozumieniu ustawy, nie jest:",
+          "question":
+              "Bronią, w rozumieniu ustawy o broni i amunicji, nie jest:",
           "answers": [
-            {"text": "Broń palna", "correct": false},
-            {"text": "Broń pneumatyczna", "correct": false},
-            {"text": "Broń ostra", "correct": false},
+            {"text": "kastet", "isCorrect": true},
+            {"text": "nóż", "isCorrect": true},
+            {
+              "text":
+                  "pałka wykonana z drewna lub innego ciężkiego i twardego materiału, imitująca kij bejsbolowy",
+              "isCorrect": true
+            }
           ]
         },
-        {
-          "question": "Bronią, w rozumieniu ustawy, jest:",
-          "answers": [
-            {"text": "Miotacz gazu obezwładniającego", "correct": true},
-            {"text": "Miotacz gazu łzawiącego", "correct": true},
-            {"text": "Miotacz gazu pieprzowego", "correct": true},
-          ]
-        },
-
         {
           "question": "Bronią, w rozumieniu ustawy o broni i amunicji, jest:",
           "answers": [
@@ -144,10 +166,10 @@ class _QuizPageState extends State<QuizPage> {
           ]
         }
 
-        // Add more questions here as per the provided data.
+        // More questions can be added here
       ];
     }
-    return []; // Return empty for categories without questions defined.
+    return [];
   }
 
   @override
@@ -163,22 +185,45 @@ class _QuizPageState extends State<QuizPage> {
                   title: Text(questions[_currentQuestionIndex]['question']),
                 ),
                 ...questions[_currentQuestionIndex]['answers']
-                    .map<Widget>((answer) => ListTile(
-                          title: Text(answer['text']),
-                          leading: Radio(
-                            value: answer['correct'],
-                            groupValue: null,
-                            onChanged: (value) {
-                              if (answer['correct']) {
-                                print('Correct!');
-                              } else {
-                                print('Wrong!');
-                              }
-                              _answerQuestion();
-                            },
-                          ),
-                        ))
-                    .toList(),
+                    .asMap()
+                    .entries
+                    .map<Widget>((entry) {
+                  int idx = entry.key;
+                  var answer = entry.value;
+                  return InkWell(
+                    onTap: () => _selectAnswer(idx),
+                    child: Container(
+                      color: _selectedAnswerIndex == idx
+                          ? (answer['isCorrect']
+                              ? Colors.green[300]
+                              : Colors.red[300])
+                          : null,
+                      child: ListTile(
+                        title: Text(answer['text']),
+                        leading: Radio(
+                          value: idx,
+                          groupValue: _selectedAnswerIndex,
+                          onChanged: (int? value) {
+                            _selectAnswer(idx);
+                          },
+                        ),
+                      ),
+                    ),
+                  );
+                }).toList(),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    OutlinedButton(
+                      onPressed: _previousQuestion,
+                      child: Text('Previous'),
+                    ),
+                    OutlinedButton(
+                      onPressed: _nextQuestion,
+                      child: Text('Next'),
+                    ),
+                  ],
+                ),
               ],
             )
           : Center(
