@@ -452,7 +452,7 @@ class _QuizPageState extends State<QuizPage> {
       ),
     );
   }
-
+ 
   Widget buildQuestionPage(Map<String, dynamic>? question, int index) {
     return Container(
       padding: const EdgeInsets.all(16),
