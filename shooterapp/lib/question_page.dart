@@ -9,11 +9,10 @@ class QuestionPage extends StatefulWidget {
 class _QuestionPageState extends State<QuestionPage> {
   final List<String> categories = [
     "Prawo Karne",
-    "Obrona Konieczna",
     "Ustawa o broni i amunicji",
-    "Dodatkowe akty prawne",
+    "Regulamin Strzelecki",
     "Bezpieczeństwo w strzelectwie",
-    "Przepisy sportowe ISSF",
+    "Budowa Broni",
   ];
 
   int?
