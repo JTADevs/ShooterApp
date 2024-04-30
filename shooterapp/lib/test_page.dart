@@ -3,6 +3,7 @@ import 'dart:async';
 import 'dart:math'; // Do losowania pytań
 import 'package:shared_preferences/shared_preferences.dart';
 
+
 class TestPage extends StatefulWidget {
   @override
   _TestPageState createState() => _TestPageState();
@@ -18,8 +19,7 @@ class _TestPageState extends State<TestPage> {
 
   List<String> questions = []; // Tutaj będą wszystkie pytania
   List<List<String>> options = []; // Opcje odpowiedzi do wszystkich pytań
-  List<bool> answeredCorrectly =
-      List.filled(10, false); // Śledzenie poprawności odpowiedzi
+  List<bool> answeredCorrectly = List.filled(10, false); // Śledzenie poprawności odpowiedzi
 
   @override
   void initState() {
@@ -45,7 +45,7 @@ class _TestPageState extends State<TestPage> {
   }
 
   void startTimer() {
-    _timer = Timer.periodic(Duration(seconds: 1), (timer) {
+    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       if (_timeLeft > 0) {
         setState(() {
           _timeLeft--;
@@ -93,11 +93,11 @@ class _TestPageState extends State<TestPage> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text("Błąd!"),
-        content: Text("Niestety, nie zdałeś/zdałaś testu. Spróbuj ponownie."),
+        title: const Text("Błąd!"),
+        content: const Text("Niestety, nie zdałeś/zdałaś testu. Spróbuj ponownie."),
         actions: <Widget>[
           TextButton(
-            child: Text('OK'),
+            child: const Text('OK'),
             onPressed: () {
               Navigator.of(context).pop();
               Navigator.of(context).pop();
@@ -112,11 +112,11 @@ class _TestPageState extends State<TestPage> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text("Czas minął!"),
-        content: Text("Twój czas na wykonanie testu się skończył."),
+        title: const Text("Czas minął!"),
+        content: const Text("Twój czas na wykonanie testu się skończył."),
         actions: <Widget>[
           TextButton(
-            child: Text('OK'),
+            child: const Text('OK'),
             onPressed: () {
               Navigator.of(context).pop(); // Zamyka dialog
               Navigator.of(context).pop(); // Wraca do poprzedniej strony
@@ -147,7 +147,7 @@ class _TestPageState extends State<TestPage> {
               padding: const EdgeInsets.all(8.0),
               child: Text(questions[_currentIndex],
                   style:
-                      TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold)),
+                      const TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold)),
             ),
             for (int i = 0; i < options[_currentIndex].length; i++)
               ListTile(
@@ -162,7 +162,7 @@ class _TestPageState extends State<TestPage> {
                   // Reset test or go back to main menu
                   Navigator.of(context).pop();
                 },
-                child: Text("Zakończ i zobacz wyniki"),
+                child: const Text("Zakończ i zobacz wyniki"),
               ),
             ),
           ]

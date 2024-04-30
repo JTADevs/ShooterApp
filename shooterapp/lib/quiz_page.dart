@@ -13,10 +13,8 @@ class QuizPage extends StatefulWidget {
 }
 
 class _QuizPageState extends State<QuizPage> {
-  PageController _pageController = PageController();
+  final PageController _pageController = PageController();
   double _currentQuestionIndex = 0; // Changed to double to work with Slider
-  int? _selectedAnswerIndex;
-  bool _isAnswerSelected = false;
   List<Map<String, dynamic>> questions = [];
 
   Future<List<Map<String, dynamic>>> _loadQuestionsFromJson(
@@ -37,7 +35,15 @@ class _QuizPageState extends State<QuizPage> {
     _loadQuestionsFromJson(_getJsonPath(widget.category))
         .then((loadedQuestions) {
       setState(() {
-        questions = loadedQuestions;
+        questions = loadedQuestions.map((questionData) {
+          List<dynamic> answers = List.from(questionData['answers']);
+          answers.shuffle(); 
+          return {
+            "question": questionData['question'],
+            "select": questionData['select'],
+            "answers": answers,
+          };
+        }).toList();
       });
     });
   }
@@ -66,8 +72,6 @@ class _QuizPageState extends State<QuizPage> {
   void _selectAnswer(int index) {
     setState(() {
       questions[_currentQuestionIndex.round()]["select"] = index;
-      _selectedAnswerIndex = index;
-      _isAnswerSelected = true;
     });
   }
 
@@ -118,26 +122,24 @@ class _QuizPageState extends State<QuizPage> {
       child: Column(
         children: <Widget>[
           Container(
-            child: Container(
-              padding: const EdgeInsets.all(16),
-              margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 20),
-              decoration: BoxDecoration(
-                color: Colors.yellow[100],
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.5),
-                    spreadRadius: 5,
-                    blurRadius: 7,
-                    offset: Offset(0, 3),
-                  ),
-                ],
-              ),
-              child: Text(
-                question['question'],
-                style: const TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
+            padding: const EdgeInsets.all(16),
+            margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 20),
+            decoration: BoxDecoration(
+              color: Colors.yellow[100],
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.5),
+                  spreadRadius: 5,
+                  blurRadius: 7,
+                  offset: const Offset(0, 3),
                 ),
+              ],
+            ),
+            child: Text(
+              question['question'],
+              style: const TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
               ),
             ),
           ),
@@ -146,34 +148,29 @@ class _QuizPageState extends State<QuizPage> {
               int idx = question['answers'].indexOf(answer);
               return InkWell(
                 onTap: () => _selectAnswer(idx),
-                child: AnimatedContainer(
-                  duration: const Duration(milliseconds: 300),
-                  curve: Curves.easeInOut,
-                  decoration: BoxDecoration(
-                    color: question["select"] == idx
-                        ? (answer['isCorrect'] ? Colors.green : Colors.red)
-                        : Colors.white,
-                    borderRadius: BorderRadius.circular(10),
-                    border: Border.all(
-                      color: Colors.black.withOpacity(0.2),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                  child: AnimatedContainer(
+                    duration: const Duration(milliseconds: 300),
+                    curve: Curves.easeInOut,
+                    decoration: BoxDecoration(
+                      color: question["select"] == idx
+                          ? (answer['isCorrect'] ? Colors.green : Colors.red)
+                          : Colors.white,
+                      borderRadius: BorderRadius.circular(10),
+                      border: Border.all(
+                        color: Colors.black.withOpacity(0.2),
+                      ),
                     ),
-                  ),
-                  margin: const EdgeInsets.symmetric(
-                    vertical: 10,
-                    horizontal: 20,
-                  ),
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 12,
-                    horizontal: 20,
-                  ),
-                  child: ListTile(
-                    title: Text(answer['text']),
-                    leading: Radio(
-                      value: idx,
-                      groupValue: question["select"],
-                      onChanged: (Object? value) {
-                        _selectAnswer(idx);
-                      },
+                    child: SizedBox( // Używamy SizedBox, aby ustawić szerokość na infinity (czyli pełną dostępną szerokość)
+                      width: double.infinity,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 20),
+                        child: Text(
+                          answer['text'],
+                          textAlign: TextAlign.center, // Centrowanie tekstu
+                        ),
+                      ),
                     ),
                   ),
                 ),

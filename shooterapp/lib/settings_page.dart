@@ -31,7 +31,7 @@ class _SettingsPageState extends State<SettingsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Settings"),
+        title: const Text("Settings"),
       ),
       body: Padding(
         padding: EdgeInsets.all(16),
@@ -40,28 +40,28 @@ class _SettingsPageState extends State<SettingsPage> {
             if (_newImage != null)
               Image.file(_newImage!,
                   width: 100, height: 100, fit: BoxFit.cover),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             ElevatedButton(
               onPressed: _pickImage,
-              child: Text('Change Image'),
+              child: const Text('Change Image'),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             TextField(
               controller: _ageController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Change your age',
                 border: OutlineInputBorder(),
               ),
               keyboardType: TextInputType.number,
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             ElevatedButton(
               onPressed: () => _pickExamDate(context),
-              child: Text('Change Exam Date'),
+              child: const Text('Change Exam Date'),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             SwitchListTile(
-              title: Text('Notifications'),
+              title: const Text('Notifications'),
               value: _notificationsEnabled ?? false,
               onChanged: (val) {
                 setState(() {
@@ -71,14 +71,14 @@ class _SettingsPageState extends State<SettingsPage> {
               activeTrackColor: Colors.lightGreenAccent,
               activeColor: Colors.green,
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             ElevatedButton(
               onPressed: _saveSettings,
-              child: Text('Save Changes'),
               style: ElevatedButton.styleFrom(
                 foregroundColor: Colors.white,
                 backgroundColor: Colors.blue,
               ),
+              child: const Text('Save Changes'),
             ),
           ],
         ),
