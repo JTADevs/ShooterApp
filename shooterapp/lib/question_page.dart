@@ -31,16 +31,19 @@ class _QuestionPageState extends State<QuestionPage> {
           List<Color> gradientColors;
           if (index % 3 == 0) {
             gradientColors = [
-              const Color.fromARGB(255, 157, 25, 25)!,
-              Colors.redAccent[400]!
+              Color.fromARGB(255, 33, 30, 30)!,
+              Color.fromARGB(255, 87, 80, 80)!
             ];
           } else if (index % 3 == 1) {
             gradientColors = [
-              const Color.fromARGB(255, 220, 147, 28)!,
-              const Color.fromARGB(255, 235, 216, 8)!
+              Color.fromARGB(255, 78, 99, 69)!,
+              Color.fromARGB(255, 70, 70, 69)!
             ];
           } else {
-            gradientColors = [Colors.orange[800]!, Colors.orangeAccent[400]!];
+            gradientColors = [
+              Color.fromARGB(255, 18, 35, 14)!,
+              Color.fromARGB(255, 123, 142, 121)!
+            ];
           }
 
           return InkWell(

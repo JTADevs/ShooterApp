@@ -66,10 +66,10 @@ class _MyNavigationBarState extends State<MyNavigationBar> {
           ),
         ],
         currentIndex: _selectedIndex,
-        selectedItemColor: Colors
-            .amber[800], // Kolor dla aktualnie wybranej ikony (po kliknięciu)
-        unselectedItemColor: Colors
-            .amber[300], // Kolor dla nieaktywnych ikon (zawsze podświetlone)
+        selectedItemColor: Color.fromARGB(255, 11, 19,
+            11), // Kolor dla aktualnie wybranej ikony (po kliknięciu)
+        unselectedItemColor: Color.fromARGB(255, 104, 101,
+            101), // Kolor dla nieaktywnych ikon (zawsze podświetlone)
         onTap: _onItemTapped,
       ),
     );
