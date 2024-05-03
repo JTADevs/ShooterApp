@@ -1,42 +1,55 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'Model/questiondata.dart';
 
-class ScorePage extends StatefulWidget {
-  @override
-  _ScorePageState createState() => _ScorePageState();
-}
+class ScorePage extends StatelessWidget {
+  final List<QuestionData> wrongAnswers;
 
-class _ScorePageState extends State<ScorePage> {
-  String testResults = "";
-
-  @override
-  void initState() {
-    super.initState();
-    loadResults();
-  }
-
-  void loadResults() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    setState(() {
-      testResults = prefs.getString('testResults') ?? "";
-    });
-  }
+  const ScorePage({Key? key, required this.wrongAnswers}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    List<String> results = testResults.split(",");
     return Scaffold(
       appBar: AppBar(
-        title: Text('Twoje Wyniki'),
+        title: Text('Wrong Answers'),
       ),
       body: ListView.builder(
-        itemCount: results.length,
+        itemCount: wrongAnswers.length,
         itemBuilder: (context, index) {
-          bool correct = results[index] == "true";
           return ListTile(
-            title: Text(
-                "Pytanie ${index + 1}: ${correct ? "Poprawne" : "Błędne"}"),
-            tileColor: correct ? Colors.green[100] : Colors.red[100],
+            title: Text(wrongAnswers[index].question),
+            subtitle: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                SizedBox(height: 8),
+                Text(
+                  'Correct answer(s):',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                SizedBox(height: 4),
+                ...wrongAnswers[index].options.asMap().entries.map((entry) {
+                  if (wrongAnswers[index].correctAnswers[entry.key]) {
+                    return Text(entry.value,
+                        style: TextStyle(color: Colors.green));
+                  } else {
+                    return SizedBox.shrink();
+                  }
+                }).toList(),
+                SizedBox(height: 8),
+                Text(
+                  'Your answer(s):',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                SizedBox(height: 4),
+                ...wrongAnswers[index].options.asMap().entries.map((entry) {
+                  if (!wrongAnswers[index].correctAnswers[entry.key]) {
+                    return Text(entry.value,
+                        style: TextStyle(color: Colors.red));
+                  } else {
+                    return SizedBox.shrink();
+                  }
+                }).toList(),
+              ],
+            ),
           );
         },
       ),

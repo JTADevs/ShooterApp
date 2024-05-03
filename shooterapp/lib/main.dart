@@ -25,11 +25,13 @@ class MyNavigationBar extends StatefulWidget {
 
 class _MyNavigationBarState extends State<MyNavigationBar> {
   int _selectedIndex = 0;
-  static List<Widget> _widgetOptions = <Widget>[
+  static final List<Widget> _widgetOptions = <Widget>[
     HomePage(),
     TestPage(),
     QuestionPage(),
-    ScorePage(),
+    ScorePage(
+      wrongAnswers: [],
+    ),
   ];
 
   static get questions => null;

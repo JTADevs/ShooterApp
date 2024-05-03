@@ -3,9 +3,8 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:math';
 import 'package:flutter/services.dart' show rootBundle;
-import 'package:shared_preferences/shared_preferences.dart';
-import 'question_widget.dart';
-
+import 'Model/questiondata.dart';
+import 'score_page.dart';
 
 class TestPage extends StatefulWidget {
   @override
@@ -17,13 +16,9 @@ class _TestPageState extends State<TestPage> {
   final int _totalTime = 20 * 60; // 20 minutes in seconds
   late Timer _timer;
   int _timeLeft = 0;
-  int allowedMistakes = 1;
-  int currentMistakes = 0;
   bool hasStarted = false;
-  List<String> questions = [];
-  List<List<String>> options = [];
-  List<List<bool>> correctAnswerFlags = []; // Tracking correct answers
-  List<bool> answeredCorrectly = []; // Tracking if answers were correct
+  List<QuestionData> allQuestions = [];
+  List<QuestionData> wrongAnswers = [];
 
   @override
   void initState() {
@@ -33,10 +28,7 @@ class _TestPageState extends State<TestPage> {
 
   Future<void> loadQuestions() async {
     try {
-      questions = [];
-      options = [];
-      correctAnswerFlags = [];
-      answeredCorrectly = []; // Initialize for new quiz session
+      List<QuestionData> loadedQuestions = [];
 
       List<Map<String, dynamic>> sources = [
         {"file": "Assets/uobia.json", "count": 4},
@@ -47,50 +39,32 @@ class _TestPageState extends State<TestPage> {
 
       for (var source in sources) {
         String data = await rootBundle.loadString(source['file']);
-        var jsonData = json.decode(data) as List;
+        List<dynamic> jsonData = json.decode(data);
         int count = int.parse(source['count'].toString());
-        List<Map<String, dynamic>> selectedQuestions =
-            List.from(jsonData.take(count));
+        List<dynamic> selectedQuestions = jsonData.take(count).toList();
 
         for (var questionData in selectedQuestions) {
-          questions.add(questionData['question']);
-          List<String> answerOptions = [];
-          List<bool> correctAnswers = [];
-          for (var answer in questionData['answers']) {
-            answerOptions.add(answer['text']);
-            correctAnswers.add(answer['isCorrect']);
-          }
-          options.add(answerOptions);
-          correctAnswerFlags.add(correctAnswers);
-          answeredCorrectly.add(false); // Initialize as false
+          loadedQuestions.add(QuestionData(
+            question: questionData['question'],
+            options: List<String>.from(
+                questionData['answers'].map((x) => x['text'])),
+            correctAnswers: List<bool>.from(
+                questionData['answers'].map((x) => x['isCorrect'])),
+          ));
         }
       }
 
       var rand = Random();
-      questions.shuffle(rand);
-      options.shuffle(rand);
-      correctAnswerFlags.shuffle(rand);
+      loadedQuestions.shuffle(rand);
 
       setState(() {
+        allQuestions = loadedQuestions;
         hasStarted = true;
         _timeLeft = _totalTime;
         startTimer();
       });
     } catch (e) {
       print('Error loading questions: $e');
-      showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-          title: Text("Error"),
-          content: Text("Failed to load the questions. Please try again."),
-          actions: <Widget>[
-            TextButton(
-              onPressed: () => Navigator.of(context).pop(),
-              child: Text('OK'),
-            ),
-          ],
-        ),
-      );
     }
   }
 
@@ -107,59 +81,42 @@ class _TestPageState extends State<TestPage> {
     });
   }
 
-  void checkAnswer(int answerIndex, int questionIndex) {
-    bool correct = correctAnswerFlags[questionIndex][answerIndex];
+  void checkAnswer(int answerIndex) {
+    QuestionData currentQuestion = allQuestions[_currentIndex];
+    bool correct = currentQuestion.correctAnswers[answerIndex];
     setState(() {
-      answeredCorrectly[questionIndex] = correct; // Record the result
+      currentQuestion.answeredCorrectly = !correct;
       if (!correct) {
-        currentMistakes++;
-        if (currentMistakes > allowedMistakes) {
-          showFailureDialog();
-          _timer.cancel();
-        }
+        wrongAnswers.add(currentQuestion); // Add to the list of wrong answers
       }
-      if (_currentIndex < questions.length - 1) {
+      if (_currentIndex < allQuestions.length - 1) {
         _currentIndex++;
       } else {
         _timer.cancel();
-        showResultDialog();
+        showFinalResultDialog();
       }
     });
   }
 
-  void showFailureDialog() {
+  void showFinalResultDialog() {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text("Test Failed"),
-        content: Text("You have made too many mistakes. Please try again."),
+        title: Text("Test Completed"),
+        content: Text(
+            "You have completed the test. Wrong answers: ${wrongAnswers.length}"),
         actions: <Widget>[
           TextButton(
-            child: Text('OK'),
+            child: Text('Review Wrong Answers'),
             onPressed: () {
-              Navigator.of(context).pop();
-              Navigator.of(context).pop();
+              Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => ScorePage(wrongAnswers: wrongAnswers),
+              ));
             },
           ),
-        ],
-      ),
-    );
-  }
-
-  void showResultDialog() {
-    bool passed = currentMistakes <= allowedMistakes;
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: Text(passed ? "Congratulations!" : "Test Failed"),
-        content: Text(passed
-            ? "You have passed the test."
-            : "You have made too many mistakes. Please try again."),
-        actions: <Widget>[
           TextButton(
             child: Text('OK'),
             onPressed: () {
-              Navigator.of(context).pop();
               Navigator.of(context).pop();
             },
           ),
@@ -179,7 +136,9 @@ class _TestPageState extends State<TestPage> {
             child: Text('OK'),
             onPressed: () {
               Navigator.of(context).pop();
-              Navigator.of(context).pop();
+              setState(() {
+                hasStarted = false; // Allow user to start a new test
+              });
             },
           ),
         ],
@@ -206,33 +165,80 @@ class _TestPageState extends State<TestPage> {
           if (!hasStarted) ...[
             Center(
               child: ElevatedButton(
-                onPressed: () => loadQuestions(),
+                onPressed: () {
+                  setState(() {
+                    _currentIndex = 0;
+                    _timeLeft = _totalTime;
+                    wrongAnswers.clear(); // Clear previous wrong answers
+                    hasStarted = true;
+                    loadQuestions();
+                  });
+                },
                 child: Text("Start Test"),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.blue, // Background color
+                ),
               ),
             )
-          ] else if (_currentIndex < questions.length) ...[
-            Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Text(questions[_currentIndex],
-                  style:
-                      TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold)),
-            ),
-            for (int i = 0; i < options[_currentIndex].length; i++)
-              ListTile(
-                title: Text(options[_currentIndex][i]),
-                onTap: () => checkAnswer(i, _currentIndex),
+          ] else if (_currentIndex < allQuestions.length) ...[
+            Container(
+              padding: const EdgeInsets.all(16),
+              margin: const EdgeInsets.symmetric(vertical: 8),
+              decoration: BoxDecoration(
+                color: Colors.yellow[100],
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.5),
+                    spreadRadius: 5,
+                    blurRadius: 7,
+                    offset: const Offset(0, 3),
+                  ),
+                ],
               ),
+              child: Text(
+                allQuestions[_currentIndex].question,
+                style: const TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+            ...allQuestions[_currentIndex].options.map((answer) {
+              int idx = allQuestions[_currentIndex].options.indexOf(answer);
+              return InkWell(
+                onTap: () => checkAnswer(idx),
+                child: Padding(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                  child: AnimatedContainer(
+                    duration: const Duration(),
+                    curve: Curves.easeInOut,
+                    decoration: BoxDecoration(
+                      color: allQuestions[_currentIndex].answeredCorrectly
+                          ? (allQuestions[_currentIndex].correctAnswers[idx]
+                              ? Colors.green
+                              : Colors.red)
+                          : Colors.white,
+                      borderRadius: BorderRadius.circular(10),
+                      border: Border.all(
+                        color: Colors.black.withOpacity(0.2),
+                      ),
+                    ),
+                    child: SizedBox(
+                      width: double.infinity,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 12),
+                        child: Text(
+                          answer,
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              );
+            }).toList(),
           ],
-          if (hasStarted && _currentIndex >= questions.length) ...[
-            Center(
-              child: TextButton(
-                onPressed: () {
-                  showResultDialog();
-                },
-                child: Text("See Results"),
-              ),
-            ),
-          ]
         ],
       ),
     );
