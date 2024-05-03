@@ -69,7 +69,7 @@ class _TestPageState extends State<TestPage> {
   }
 
   void startTimer() {
-    _timer = Timer.periodic(Duration(seconds: 1), (timer) {
+    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       setState(() {
         if (_timeLeft > 0) {
           _timeLeft--;
@@ -102,12 +102,12 @@ class _TestPageState extends State<TestPage> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text("Test Completed"),
+        title: const Text("Test Completed"),
         content: Text(
             "You have completed the test. Wrong answers: ${wrongAnswers.length}"),
         actions: <Widget>[
           TextButton(
-            child: Text('Review Wrong Answers'),
+            child: const Text('Review Wrong Answers'),
             onPressed: () {
               Navigator.of(context).push(MaterialPageRoute(
                 builder: (context) => ScorePage(wrongAnswers: wrongAnswers),
@@ -115,7 +115,7 @@ class _TestPageState extends State<TestPage> {
             },
           ),
           TextButton(
-            child: Text('OK'),
+            child: const Text('OK'),
             onPressed: () {
               Navigator.of(context).pop();
             },
@@ -129,11 +129,11 @@ class _TestPageState extends State<TestPage> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text("Time's Up!"),
-        content: Text("Your time to complete the test has expired."),
+        title: const Text("Time's Up!"),
+        content: const Text("Your time to complete the test has expired."),
         actions: <Widget>[
           TextButton(
-            child: Text('OK'),
+            child: const Text('OK'),
             onPressed: () {
               Navigator.of(context).pop();
               setState(() {
@@ -174,7 +174,7 @@ class _TestPageState extends State<TestPage> {
                     loadQuestions();
                   });
                 },
-                child: Text("Start Test"),
+                child: const Text("Start Test"),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.blue, // Background color
                 ),

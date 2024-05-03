@@ -10,7 +10,7 @@ class ScorePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Wrong Answers'),
+        title: const Text('Wrong Answers'),
       ),
       body: ListView.builder(
         itemCount: wrongAnswers.length,
@@ -20,32 +20,32 @@ class ScorePage extends StatelessWidget {
             subtitle: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                SizedBox(height: 8),
-                Text(
+                const SizedBox(height: 8),
+                const Text(
                   'Correct answer(s):',
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
-                SizedBox(height: 4),
+                const SizedBox(height: 4),
                 ...wrongAnswers[index].options.asMap().entries.map((entry) {
                   if (wrongAnswers[index].correctAnswers[entry.key]) {
                     return Text(entry.value,
-                        style: TextStyle(color: Colors.green));
+                        style: const TextStyle(color: Colors.green));
                   } else {
-                    return SizedBox.shrink();
+                    return const SizedBox.shrink();
                   }
                 }).toList(),
-                SizedBox(height: 8),
-                Text(
+                const SizedBox(height: 8),
+                const Text(
                   'Your answer(s):',
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
-                SizedBox(height: 4),
+                const SizedBox(height: 4),
                 ...wrongAnswers[index].options.asMap().entries.map((entry) {
                   if (!wrongAnswers[index].correctAnswers[entry.key]) {
                     return Text(entry.value,
-                        style: TextStyle(color: Colors.red));
+                        style: const TextStyle(color: Colors.red));
                   } else {
-                    return SizedBox.shrink();
+                    return const SizedBox.shrink();
                   }
                 }).toList(),
               ],
