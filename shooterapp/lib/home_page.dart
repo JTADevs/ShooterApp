@@ -1,8 +1,8 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:image_picker/image_picker.dart';
-import 'settings_page.dart'; // Użycie SettingsPage
-import 'dart:io';
+import 'settings_page.dart'; // Use SettingsPage
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -14,50 +14,42 @@ class HomePage extends StatefulWidget {
 class HomePageState extends State<HomePage> {
   TextEditingController _nameController = TextEditingController();
   TextEditingController _ageController = TextEditingController();
-  TextEditingController _emailController = TextEditingController();
-  bool _notificationsEnabled = false;
-  bool _dataLoaded = false;
-  DateTime? _examDate;
-  File? _image;
-  String? _savedName, _savedAge, _savedEmail, _savedImagePath;
+  bool notificationsEnabled = false;
 
-  // Public getters and setters
-  String? get savedAge => _savedAge;
+  DateTime? _examDate;
+  bool _dataLoaded = false;
+  String? _savedName, _savedAge;
+  String? _gender;
+  String _avatarPath = 'Assets/male.webp'; // default avatar
+
+  // Define getters
   String? get savedName => _savedName;
-  String? get savedEmail => _savedEmail;
-  bool get notificationsEnabled => _notificationsEnabled;
+  String? get savedAge => _savedAge;
   DateTime? get examDate => _examDate;
-  File? get image => _image;
-  String? get savedImagePath => _savedImagePath;
+  String? get gender => _gender;
+
+  // Define setters if needed for modification from SettingsPage
+  set savedName(String? value) {
+    _savedName = value;
+    _savePreferences();
+  }
+
+  
 
   set savedAge(String? value) {
-    setState(() {
-      _savedAge = value;
-    });
+    _savedAge = value;
+    _savePreferences();
   }
 
   set examDate(DateTime? value) {
-    setState(() {
-      _examDate = value;
-    });
+    _examDate = value;
+    _savePreferences();
   }
 
-  set notificationsEnabled(bool value) {
-    setState(() {
-      _notificationsEnabled = value;
-    });
-  }
-
-  set image(File? value) {
-    setState(() {
-      _image = value;
-    });
-  }
-
-  set savedImagePath(String? value) {
-    setState(() {
-      _savedImagePath = value;
-    });
+  set gender(String? value) {
+    _gender = value;
+    _updateAvatar();
+    _savePreferences();
   }
 
   @override
@@ -66,161 +58,153 @@ class HomePageState extends State<HomePage> {
     _loadSavedData();
   }
 
+  Future<void> _savePreferences() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('name', _savedName ?? '');
+    await prefs.setString('age', _savedAge ?? '');
+    await prefs.setString('gender', _gender ?? 'Male');
+    if (_examDate != null) {
+      await prefs.setString('examDate', _examDate!.toIso8601String());
+    }
+    setState(() {});
+  }
+
   Future<void> _loadSavedData() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    bool isFirstLaunch = prefs.getBool('first_launch') ?? true;
-    if (!isFirstLaunch) {
-      setState(() {
-        _savedName = prefs.getString('name');
-        _savedAge = prefs.getString('age');
-        _savedEmail = prefs.getString('email');
-        _savedImagePath = prefs.getString('imagePath');
-        if (_savedImagePath != null) {
-          _image = File(_savedImagePath!);
-        }
-        _dataLoaded = true;
-      });
+    _savedName = prefs.getString('name');
+    _savedAge = prefs.getString('age');
+    _gender = prefs.getString('gender');
+    _examDate = DateTime.tryParse(prefs.getString('examDate') ?? '');
+    _dataLoaded = _savedName != null; // Data loaded if name is not null
+    _updateAvatar();
+    setState(() {});
+  }
+
+  void _updateAvatar() {
+    if (_gender == "Male") {
+      _avatarPath = 'Assets/male.webp';
+    } else if (_gender == "Female") {
+      _avatarPath = 'Assets/female.webp';
     }
   }
 
   Future<void> _saveData() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setBool('first_launch', false);
     await prefs.setString('name', _nameController.text);
     await prefs.setString('age', _ageController.text);
-    await prefs.setString('email', _emailController.text);
-    if (_image != null) {
-      await prefs.setString('imagePath', _image!.path);
+    await prefs.setString('gender', _gender ?? 'Male');
+    if (_examDate != null) {
+      await prefs.setString('examDate', _examDate!.toIso8601String());
     }
-    setState(() {
-      _dataLoaded = true;
-    });
-  }
-
-  Future<void> _pickImage() async {
-    final ImagePicker _picker = ImagePicker();
-    final XFile? pickedFile =
-        await _picker.pickImage(source: ImageSource.gallery);
-    if (pickedFile != null) {
-      setState(() {
-        _image = File(pickedFile.path);
-      });
-    }
+    _savedName = _nameController.text;
+    _savedAge = _ageController.text;
+    _dataLoaded = true;
+    _updateAvatar();
+    setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24.0),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                if (!_dataLoaded) ...[
-                  ElevatedButton(
-                    onPressed: _pickImage,
-                    child: Icon(Icons.upload, size: 30),
-                    style: ElevatedButton.styleFrom(
-                      shape: CircleBorder(),
-                      backgroundColor: Colors.blue,
-                      padding: EdgeInsets.all(24),
-                    ),
-                  ),
-                  SizedBox(height: 20),
-                  TextField(
-                    controller: _nameController,
-                    decoration: InputDecoration(
-                      labelText: 'Enter your name',
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(30)),
-                    ),
-                  ),
-                  SizedBox(height: 20),
-                  TextField(
-                    controller: _ageController,
-                    decoration: InputDecoration(
-                      labelText: 'Enter your age',
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(30)),
-                    ),
-                  ),
-                  SizedBox(height: 20),
-                  TextField(
-                    controller: _emailController,
-                    decoration: InputDecoration(
-                      labelText: 'Enter your email',
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(30)),
-                    ),
-                  ),
-                  SizedBox(height: 20),
-                  ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => SettingsPage(this)),
-                      );
-                    },
-                    child: Text('Settings'),
-                    style: ElevatedButton.styleFrom(
-                      foregroundColor: Colors.white,
-                      backgroundColor: Colors.blue,
-                    ),
-                  ),
-                  SizedBox(height: 20),
-                  ElevatedButton(
-                    onPressed: _saveData,
-                    child: Text('Save Data'),
-                    style: ElevatedButton.styleFrom(
-                      foregroundColor: Colors.white,
-                      backgroundColor: Colors.red,
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 50, vertical: 20),
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20)),
-                    ),
-                  ),
-                ] else ...[
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      if (_image != null)
-                        Image.file(_image!,
-                            width: 100, height: 100, fit: BoxFit.cover),
-                      Column(
-                        children: [
-                          Text('$_savedName, $_savedAge',
-                              style: TextStyle(fontSize: 18)),
-                          Text('$_savedEmail', style: TextStyle(fontSize: 16)),
-                          if (_examDate != null)
-                            Text('Exam Date: ${_examDate!.toLocal()}'
-                                .split(' ')[0]),
-                        ],
-                      ),
-                    ],
-                  ),
-                  ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => SettingsPage(this)),
-                      );
-                    },
-                    child: Text('Settings'),
-                    style: ElevatedButton.styleFrom(
-                      foregroundColor: Colors.white,
-                      backgroundColor: Colors.blue,
-                    ),
-                  ),
-                ],
-              ],
+      appBar: AppBar(
+        title: Text("User Profile"),
+      ),
+      body: _dataLoaded ? _buildProfileView() : _buildInputForm(),
+      floatingActionButton: _dataLoaded
+          ? FloatingActionButton(
+              onPressed: () {
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: (_) => SettingsPage(this)));
+              },
+              child: Icon(Icons.settings),
+              backgroundColor: Colors.blue,
+            )
+          : null,
+    );
+  }
+
+  Widget _buildInputForm() {
+    return SingleChildScrollView(
+      padding: EdgeInsets.all(20),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          DropdownButton<String>(
+            value: _gender,
+            hint: Text("Select Gender"),
+            items: <String>['Male', 'Female'].map((String value) {
+              return DropdownMenuItem<String>(
+                value: value,
+                child: Text(value),
+              );
+            }).toList(),
+            onChanged: (value) {
+              setState(() {
+                _gender = value;
+                _updateAvatar();
+              });
+            },
+          ),
+          TextField(
+            controller: _nameController,
+            decoration: InputDecoration(labelText: 'Name'),
+          ),
+          TextField(
+            controller: _ageController,
+            decoration: InputDecoration(labelText: 'Age'),
+            keyboardType: TextInputType.number,
+          ),
+          ElevatedButton(
+            onPressed: () async {
+              final DateTime? picked = await showDatePicker(
+                context: context,
+                initialDate: _examDate ?? DateTime.now(),
+                firstDate: DateTime(2001),
+                lastDate: DateTime(2101),
+              );
+              if (picked != null) setState(() => _examDate = picked);
+            },
+            child: Text('Set Exam Date'),
+          ),
+          ElevatedButton(
+            onPressed: _saveData,
+            child: Text('Save Data'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildProfileView() {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          // Increased the size of the avatar image
+          Container(
+            width: 150, // Increased size from 100 to 150
+            height: 150, // Increased size from 100 to 150
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              image: DecorationImage(
+                fit: BoxFit.fill,
+                image: AssetImage(_avatarPath),
+              ),
             ),
           ),
-        ),
+          SizedBox(height: 20), // Added some spacing between the image and text
+          // Increased the font size and made text bold
+          Text('Name: $_savedName',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+          SizedBox(height: 10), // Added some spacing between text lines
+          Text('Age: $_savedAge',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+          SizedBox(height: 10), // Added some spacing between text lines
+
+          if (_examDate != null)
+            Text('Exam Date: ${_examDate!.toIso8601String().split('T')[0]}',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+        ],
       ),
     );
   }

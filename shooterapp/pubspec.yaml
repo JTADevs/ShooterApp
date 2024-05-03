@@ -68,6 +68,9 @@ flutter:
   - Assets/regulamin.json
   - Assets/bezpieczenstwo.json
   - Assets/issf.json
+  - Assets/male.webp
+  - Assets/female.webp
+
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 
