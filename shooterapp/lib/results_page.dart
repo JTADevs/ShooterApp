@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 class ResultsPage extends StatelessWidget {
   final String type;  // 'tests' lub konkretna kategoria quizu
 
+  
+
+
   ResultsPage({required this.type});
 
   @override
