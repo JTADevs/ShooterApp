@@ -5,6 +5,7 @@ import 'package:patent_strzelecki/Service/auth.dart';
 import 'package:patent_strzelecki/Service/forgot_Password.dart';
 import 'package:patent_strzelecki/Views/setup_profile_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:email_validator/email_validator.dart';
 
 class RegistrationPage extends StatefulWidget {
   const RegistrationPage({Key? key}) : super(key: key);
@@ -101,7 +102,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                     TextFormField(
                       controller: _emailController,
                       validator: (value) {
-                        if (value == null || !value.contains('@')) {
+                        if (value == null || !EmailValidator.validate(value)) {
                           return 'Please enter a valid email address.';
                         }
                         return null;
