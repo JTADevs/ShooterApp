@@ -37,8 +37,8 @@ class _HomePageState extends State<HomePage> {
     await FirebaseAuth.instance.signOut(); // Wylogowanie użytkownika z Firebase
 
  
-    Navigator.of(context).pushReplacementNamed(
-        '/login'); 
+    // Navigator.of(context).pushReplacementNamed(
+    //     '/login'); 
   }
 
   @override

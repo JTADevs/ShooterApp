@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:patent_strzelecki/Widget/question_widget.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class QuizPage extends StatefulWidget {
   final String category;
@@ -21,6 +22,7 @@ class _QuizPageState extends State<QuizPage> {
     String jsonContent = await rootBundle.loadString(jsonPath);
     List<Map<String, dynamic>> jsonData =
         List<Map<String, dynamic>>.from(json.decode(jsonContent));
+    jsonData.map((j) => dodajDoKolekcji('/questions/prawno_karne',j));
     setState(() {
       questions = jsonData.map((questionData) {
         List<dynamic> answers = List.from(questionData['answers']);
@@ -32,6 +34,19 @@ class _QuizPageState extends State<QuizPage> {
         };
       }).toList();
     });
+  }
+
+  Future<void> dodajDoKolekcji(String nazwaKolekcji, Map<String, dynamic> dane) async {
+    CollectionReference kolekcja = FirebaseFirestore.instance.collection(nazwaKolekcji);
+
+    return kolekcja
+      .add(dane)
+      .then((DocumentReference document) {
+        print("Dokument dodany z ID: ${document.id}");
+      })
+      .catchError((e) {
+        print("Błąd dodawania dokumentu: $e");
+      });
   }
 
   @override

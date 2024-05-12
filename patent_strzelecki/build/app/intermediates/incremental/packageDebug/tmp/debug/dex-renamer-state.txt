@@ -1,4 +1,4 @@
-#Sun May 12 16:25:58 CEST 2024
+#Sun May 12 18:33:51 CEST 2024
 base.0=C\:\\Users\\jakub\\Desktop\\ShooterApp\\patent_strzelecki\\build\\app\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes.dex
 base.1=C\:\\Users\\jakub\\Desktop\\ShooterApp\\patent_strzelecki\\build\\app\\intermediates\\dex\\debug\\mergeLibDexDebug\\0\\classes.dex
 base.2=C\:\\Users\\jakub\\Desktop\\ShooterApp\\patent_strzelecki\\build\\app\\intermediates\\dex\\debug\\mergeProjectDexDebug\\0\\classes.dex

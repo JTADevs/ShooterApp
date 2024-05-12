@@ -15,6 +15,7 @@ class RegistrationPage extends StatefulWidget {
 }
 
 class _RegistrationPageState extends State<RegistrationPage> {
+
   final GlobalKey<FormState> _formKey = GlobalKey();
 
   final Auth _auth = Auth();
@@ -31,9 +32,9 @@ class _RegistrationPageState extends State<RegistrationPage> {
       return;
     }
     _formKey.currentState!.save();
-    setState(() {
-      _isAuthenticating = true;
-    });
+    // setState(() {
+    //   _isAuthenticating = true;
+    // });
 
     try {
       if (!_isLogin &&
@@ -47,14 +48,14 @@ class _RegistrationPageState extends State<RegistrationPage> {
       if (_isLogin) {
         userCredential =
             await _auth.signIn(_emailController.text, _passwordController.text);
-        Navigator.of(context).pushReplacementNamed('/home');
+        // Navigator.of(context).pushReplacementNamed('/home');
       } else {
         userCredential =
             await _auth.signUp(_emailController.text, _passwordController.text);
         final SharedPreferences prefs = await SharedPreferences.getInstance();
         await prefs.setBool('isFirstLogin', true);
-        Navigator.of(context).pushReplacement(
-            MaterialPageRoute(builder: (_) => SetupProfilePage()));
+        // Navigator.of(context).pushReplacement(
+        //     MaterialPageRoute(builder: (_) => SetupProfilePage()));
       }
     } on FirebaseAuthException catch (e) {
       var errorMessage = 'Authentication failed';
@@ -71,11 +72,11 @@ class _RegistrationPageState extends State<RegistrationPage> {
           backgroundColor: Theme.of(context).errorColor,
         ),
       );
-    } finally {
-      setState(() {
-        _isAuthenticating = false;
-      });
     }
+
+    // setState(() {
+    //   _isAuthenticating = false;
+    // });
   }
 
   @override

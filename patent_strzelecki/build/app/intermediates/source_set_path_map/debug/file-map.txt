@@ -23,8 +23,9 @@ com.example.patent_strzelecki.app-rs-21 C:\Users\jakub\Desktop\ShooterApp\patent
 com.example.patent_strzelecki.app-mergeDebugResources-22 C:\Users\jakub\Desktop\ShooterApp\patent_strzelecki\build\app\intermediates\incremental\debug\mergeDebugResources\merged.dir
 com.example.patent_strzelecki.app-mergeDebugResources-23 C:\Users\jakub\Desktop\ShooterApp\patent_strzelecki\build\app\intermediates\incremental\debug\mergeDebugResources\stripped.dir
 com.example.patent_strzelecki.app-merged_res-24 C:\Users\jakub\Desktop\ShooterApp\patent_strzelecki\build\app\intermediates\merged_res\debug
-com.example.patent_strzelecki.app-packaged_res-25 C:\Users\jakub\Desktop\ShooterApp\patent_strzelecki\build\firebase_auth\intermediates\packaged_res\debug
-com.example.patent_strzelecki.app-packaged_res-26 C:\Users\jakub\Desktop\ShooterApp\patent_strzelecki\build\firebase_core\intermediates\packaged_res\debug
-com.example.patent_strzelecki.app-packaged_res-27 C:\Users\jakub\Desktop\ShooterApp\patent_strzelecki\build\google_sign_in_android\intermediates\packaged_res\debug
-com.example.patent_strzelecki.app-packaged_res-28 C:\Users\jakub\Desktop\ShooterApp\patent_strzelecki\build\shared_preferences_android\intermediates\packaged_res\debug
-com.example.patent_strzelecki.app-packaged_res-29 C:\Users\jakub\Desktop\ShooterApp\patent_strzelecki\build\sign_in_with_apple\intermediates\packaged_res\debug
+com.example.patent_strzelecki.app-packaged_res-25 C:\Users\jakub\Desktop\ShooterApp\patent_strzelecki\build\cloud_firestore\intermediates\packaged_res\debug
+com.example.patent_strzelecki.app-packaged_res-26 C:\Users\jakub\Desktop\ShooterApp\patent_strzelecki\build\firebase_auth\intermediates\packaged_res\debug
+com.example.patent_strzelecki.app-packaged_res-27 C:\Users\jakub\Desktop\ShooterApp\patent_strzelecki\build\firebase_core\intermediates\packaged_res\debug
+com.example.patent_strzelecki.app-packaged_res-28 C:\Users\jakub\Desktop\ShooterApp\patent_strzelecki\build\google_sign_in_android\intermediates\packaged_res\debug
+com.example.patent_strzelecki.app-packaged_res-29 C:\Users\jakub\Desktop\ShooterApp\patent_strzelecki\build\shared_preferences_android\intermediates\packaged_res\debug
+com.example.patent_strzelecki.app-packaged_res-30 C:\Users\jakub\Desktop\ShooterApp\patent_strzelecki\build\sign_in_with_apple\intermediates\packaged_res\debug
