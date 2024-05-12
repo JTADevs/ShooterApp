@@ -1,0 +1,1 @@
+ /Users/tymekpalak/Development/patent_strzelecki/.dart_tool/flutter_build/fe224507d7f7ad4098f1c0dccaceeb4d/native_assets.yaml: 
