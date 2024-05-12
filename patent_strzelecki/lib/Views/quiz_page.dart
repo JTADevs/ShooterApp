@@ -47,7 +47,7 @@ class _QuizPageState extends State<QuizPage> {
 
   String _getJsonPath(String category) {
     switch (category) {
-      case "Prawo karne":
+      case "Prawo Karne":
         return 'Assets/Questions/prawo_karne.json';
 
       case "Ustawa o broni i amunicji":
@@ -57,7 +57,7 @@ class _QuizPageState extends State<QuizPage> {
       case "Bezpieczeństwo w strzelectwie":
         return 'Assets/Questions/bezpieczenstwo.json';
       default:
-        return 'Assets/issf.json';
+        return 'Assets/Questions/issf.json';
     }
   }
 

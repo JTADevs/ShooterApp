@@ -1,0 +1,1266 @@
+[
+    {
+        "question": "Właściwy organ Policji może cofnąć pozwolenie na broń:",
+        "select": -1,
+        "answers": [
+            {
+                "text": "w przypadku naruszenia przez osobę posiadającą pozwolenie na broń obowiązku rejestracji broni;",
+                "isCorrect": true
+            },
+            {
+                "text": "w przypadku zgłoszenia broni jako zaginionej;",
+                "isCorrect": false
+            },
+            {
+                "text": "w przypadku zmiany miejsca zamieszkania przez osobę posiadającą broń;",
+                "isCorrect": false
+            }
+        ]
+    },
+    {
+        "question": "Osoby posiadające broń palną, są zobowiązane do :",
+        "select": -1,
+        "answers": [
+            {
+                "text": "przechowywania broni w kasetach metalowych na trwałe przymocowanych do elementów konstrukcyjnych budynku lub metalowych szafach albo sejfach, posiadających zamki atestowane;",
+                "isCorrect": true
+            },
+            {
+                "text": "przechowywania broni w dowolny sposób, ale z dala od dzieci;",
+                "isCorrect": false
+            },
+            {
+                "text": "przechowywania broni w dowolnym miejscu, ale zawsze rozładowanej;",
+                "isCorrect": false
+            }
+        ]
+    },
+    {
+        "question": "Broń odpowiadającą celom sportowym oraz amunicję do takiej broni można użyczać osobom:",
+        "select": -1,
+        "answers": [
+            {
+                "text": "które posiadają pozwolenie na taką broń;",
+                "isCorrect": true
+            },
+            {
+                "text": "które posiadają pozwolenie na broń do celów kolekcjonerskich;",
+                "isCorrect": false
+            },
+            {
+                "text": "które posiadają pozwolenie na broń do celów ochrony osobistej;",
+                "isCorrect": false
+            }
+        ]
+    },
+    {
+        "question": "Czy wolno użyczać broń odpowiadającą celom sportowym oraz amunicję do takiej broni osobom, które posiadają pozwolenie na broń do celów kolekcjonerskich:",
+        "select": -1,
+        "answers": [
+            {
+                "text": "nie;",
+                "isCorrect": true
+            },
+            {
+                "text": "tylko za zgodą właściwego organu Policji;",
+                "isCorrect": false
+            },
+            {
+                "text": "tak, jeśli osoba posiada również pozwolenie na broń sportową;",
+                "isCorrect": false
+            }
+        ]
+    },
+    {
+        "question": "Czy na podstawie legitymacji posiadacza broni sportowej można zakupić amunicję do broni odpowiadającej celom kolekcjonerskim:",
+        "select": -1,
+        "answers": [
+            {
+                "text": "nie;",
+                "isCorrect": true
+            },
+            {
+                "text": "tak, jeśli osoba jest członkiem strzeleckiego klubu kolekcjonerskiego;",
+                "isCorrect": false
+            },
+            {
+                "text": "tylko za zgodą właściwego organu Policji;",
+                "isCorrect": false
+            }
+        ]
+    },
+    {
+        "question": "Czy osoba deponująca broń w jednostce Policji ma prawo do dostępu do niej w celu okazania jej osobom zainteresowanym jej nabyciem oraz oceny stanu broni:",
+        "select": -1,
+        "answers": [
+            {
+                "text": "tak, ale dopiero po uzgodnieniu z jednostką deponującą;",
+                "isCorrect": true
+            },
+            {
+                "text": "nie, broń jest przetrzymywana w jednostce Policji bez możliwości dostępu;",
+                "isCorrect": false
+            },
+            {
+                "text": "tak, bez konieczności uzgadniania z jednostką Policji;",
+                "isCorrect": false
+            }
+        ]
+    }
+    ,
+        {
+            "question": "W przypadku naruszenia przez osobę posiadającą pozwolenie na broń, zasady użyczania broni osobie nieuprawnionej:",
+            "select": -1,
+            "answers": [
+                {
+                    "text": "organ Policji może cofnąć pozwolenie na broń;",
+                    "isCorrect": true
+                },
+                {
+                    "text": "osoba może zostać ukarana grzywną;",
+                    "isCorrect": false
+                },
+                {
+                    "text": "osoba zostanie objęta dozorem policyjnym;",
+                    "isCorrect": false
+                }
+            ]
+        },
+        {
+            "question": "W przypadku naruszenia zasady używania broni - która jest zdolna do rażenia celów na odległość - przez osobę posiadającą pozwolenie na nią w celach szkoleniowych i sportowych wyłącznie na strzelnicy:",
+            "select": -1,
+            "answers": [
+                {
+                    "text": "organ Policji może cofnąć pozwolenie;",
+                    "isCorrect": true
+                },
+                {
+                    "text": "osoba zostanie zawieszona w korzystaniu ze strzelnicy;",
+                    "isCorrect": false
+                },
+                {
+                    "text": "organ Policji zastosuje karę grzywny;",
+                    "isCorrect": false
+                }
+            ]
+        },
+        {
+            "question": "Właściwy organ Policji cofa pozwolenie na broń, jeżeli osoba, której takie pozwolenie wydano:",
+            "select": -1,
+            "answers": [
+                {
+                    "text": "należy do osób z zaburzeniami psychicznymi;",
+                    "isCorrect": true
+                },
+                {
+                    "text": "posiada zbyt dużą ilość broni;",
+                    "isCorrect": false
+                },
+                {
+                    "text": "jest aktywnym członkiem klubu strzeleckiego;",
+                    "isCorrect": false
+                }
+            ]
+        },
+        {
+            "question": "Właściwy organ Policji cofa pozwolenie na broń, jeżeli osoba, której takie pozwolenie wydano:",
+            "select": -1,
+            "answers": [
+                {
+                    "text": "wykazuje istotne zaburzenia funkcjonowania psychologicznego;",
+                    "isCorrect": true
+                },
+                {
+                    "text": "posiada duży zasób wiedzy na temat broni palnej;",
+                    "isCorrect": false
+                },
+                {
+                    "text": "jest aktywnym członkiem klubu strzeleckiego;",
+                    "isCorrect": false
+                }
+            ]
+        },
+        {
+            "question": "Właściwy organ Policji cofa pozwolenie na broń, jeżeli osoba, której takie pozwolenie wydano:",
+            "select": -1,
+            "answers": [
+                {
+                    "text": "jest skazana prawomocnym orzeczeniem sądu za umyślne przestępstwo lub umyślne przestępstwo skarbowe;",
+                    "isCorrect": true
+                },
+                {
+                    "text": "posiada wiele osiągnięć sportowych w strzelectwie;",
+                    "isCorrect": false
+                },
+                {
+                    "text": "została wyróżniona przez klub strzelecki;",
+                    "isCorrect": false
+                }
+            ]
+        },
+        {
+            "question": "Właściwy organ Policji cofa pozwolenie na broń, jeżeli osoba, której takie pozwolenie wydano:",
+            "select": -1,
+            "answers": [
+                {
+                    "text": "jest skazana prawomocnym orzeczeniem sądu za nieumyślne przestępstwo przeciwko życiu i zdrowiu;",
+                    "isCorrect": true
+                },
+                {
+                    "text": "została wybrana do reprezentowania kraju w zawodach strzeleckich;",
+                    "isCorrect": false
+                },
+                {
+                    "text": "przyczyniła się do rozwoju strzelectwa w lokalnej społeczności;",
+                    "isCorrect": false
+                }
+            ]
+        },
+        {
+            "question": "Właściwy organ Policji cofa pozwolenie na broń, jeżeli osoba, której takie pozwolenie wydano:",
+            "select": -1,
+            "answers": [
+                {
+                    "text": "jest skazana prawomocnym orzeczeniem sądu za nieumyślne przestępstwo przeciwko bezpieczeństwu w komunikacji popełnione w stanie nietrzeźwości lub pod wpływem środka odurzającego albo gdy sprawca zbiegł z miejsca zdarzenia;",
+                    "isCorrect": true
+                },
+                {
+                    "text": "posiada wiele osiągnięć sportowych w strzelectwie;",
+                    "isCorrect": false
+                },
+                {
+                    "text": "została wyróżniona przez klub strzelecki;",
+                    "isCorrect": false
+                }
+            ]
+        },
+        {
+            "question": "Właściwy organ Policji cofa pozwolenie na broń, jeżeli osoba, której takie pozwolenie wydano:",
+            "select": -1,
+            "answers": [
+                {
+                    "text": "nosi broń, znajdując się w stanie po użyciu alkoholu, środka odurzającego;",
+                    "isCorrect": true
+                },
+                {
+                    "text": "posiada wiele trofeów zdobytych na zawodach strzeleckich;",
+                    "isCorrect": false
+                },
+                {
+                    "text": "posiada wykształcenie z zakresu bezpieczeństwa strzeleckiego;",
+                    "isCorrect": false
+                }
+            ]
+        },
+        {
+            "question": "Właściwy organ Policji może cofnąć pozwolenie na broń, w przypadku :",
+            "select": -1,
+            "answers": [
+                {
+                    "text": "naruszenia przez osobę posiadającą pozwolenie na broń obowiązku rejestracji broni;",
+                    "isCorrect": true
+                },
+                {
+                    "text": "posiadania przez osobę broń krótką na cele kolekcjonerskie;",
+                    "isCorrect": false
+                },
+                {
+                    "text": "używania broni w sposób zgodny z przepisami;",
+                    "isCorrect": false
+                }
+            ]
+        },
+        {
+            "question": "Właściwy organ Policji może cofnąć pozwolenie na broń:",
+            "select": -1,
+            "answers": [
+                {
+                    "text": "jeżeli ustały okoliczności faktyczne, które stanowiły podstawę do jego wydania;",
+                    "isCorrect": true
+                },
+                {
+                    "text": "w przypadku zmiany miejsca zamieszkania posiadacza broni;",
+                    "isCorrect": false
+                },
+                {
+                    "text": "w przypadku pozytywnej oceny stanu broni przez organ Policji;",
+                    "isCorrect": false
+                }
+            ]
+        },
+        
+            {
+                "question": "W przypadku naruszenia przez osobę posiadającą pozwolenie na broń, wymogu uzyskania zgody na wywóz broni i amunicji za granicę, organ Policji:",
+                "select": -1,
+                "answers": [
+                    {
+                        "text": "może cofnąć pozwolenie na broń;",
+                        "isCorrect": true
+                    },
+                    {
+                        "text": "nada osobie upomnienie;",
+                        "isCorrect": false
+                    },
+                    {
+                        "text": "nada osobie karę grzywny;",
+                        "isCorrect": false
+                    }
+                ]
+            },
+            {
+                "question": "Właściwy organ Policji cofa pozwolenie na broń, jeżeli osoba, której pozwolenie takie wydano:",
+                "select": -1,
+                "answers": [
+                    {
+                        "text": "naruszyła obowiązek zawiadomienia o utracie broni;",
+                        "isCorrect": true
+                    },
+                    {
+                        "text": "zgubiła pozwolenie na broń;",
+                        "isCorrect": false
+                    },
+                    {
+                        "text": "przetrzymywała broń w zatłoczonym miejscu;",
+                        "isCorrect": false
+                    }
+                ]
+            },
+            {
+                "question": "Organ Policji obligatoryjnie cofa pozwolenie jeżeli osoba, której pozwolenie wydano:",
+                "select": -1,
+                "answers": [
+                    {
+                        "text": "nie przestrzega warunków określonych w pozwoleniu na broń;",
+                        "isCorrect": true
+                    },
+                    {
+                        "text": "posiada duży zasób wiedzy na temat broni palnej;",
+                        "isCorrect": false
+                    },
+                    {
+                        "text": "posiada dużą kolekcję broni;",
+                        "isCorrect": false
+                    }
+                ]
+            },
+            {
+                "question": "Właściwy organ Policji w stosunku do osoby posiadającej pozwolenie na broń, która nosi broń, znajdując się w stanie po użyciu alkoholu lub substancji psychotropowej albo środka zastępczego,:",
+                "select": -1,
+                "answers": [
+                    {
+                        "text": "cofa pozwolenie na broń;",
+                        "isCorrect": true
+                    },
+                    {
+                        "text": "wystawia mandat karny;",
+                        "isCorrect": false
+                    },
+                    {
+                        "text": "nada upomnienie;",
+                        "isCorrect": false
+                    }
+                ]
+            },
+            {
+                "question": "Czy właściwy organ Policji w stosunku do osoby posiadającej - pozwolenie na broń, a uchylającej się od obowiązku poddania się badaniom lekarskim i psychologicznym i przedstawienia orzeczeń lekarskiego i psychologicznego:",
+                "select": -1,
+                "answers": [
+                    {
+                        "text": "może cofnąć pozwolenie na broń;",
+                        "isCorrect": true
+                    },
+                    {
+                        "text": "nada upomnienie;",
+                        "isCorrect": false
+                    },
+                    {
+                        "text": "zwróci się do sądu o ukaranie;",
+                        "isCorrect": false
+                    }
+                ]
+            },
+            {
+                "question": "Właściwy organ Policji może cofnąć pozwolenie na broń w przypadku naruszenia przez osobę posiadającą pozwolenie:",
+                "select": -1,
+                "answers": [
+                    {
+                        "text": "obowiązku rejestracji broni;",
+                        "isCorrect": true
+                    },
+                    {
+                        "text": "nieposiadania legitymacji strzeleckiej;",
+                        "isCorrect": false
+                    },
+                    {
+                        "text": "braku opłacenia składki członkowskiej w klubie strzeleckim;",
+                        "isCorrect": false
+                    }
+                ]
+            },
+            {
+                "question": "Osobie, która nosi broń, naruszając ograniczenie lub wykluczenie możliwości jej noszenia określone przez właściwy organ Policji w pozwoleniu na broń, albo nosi broń, naruszając zakaz jej noszenia wprowadzony przez ministra właściwego do spraw wewnętrznych:",
+                "select": -1,
+                "answers": [
+                    {
+                        "text": "cofa się obligatoryjnie pozwolenie na broń;",
+                        "isCorrect": true
+                    },
+                    {
+                        "text": "organ Policji może zastosować karę grzywny;",
+                        "isCorrect": false
+                    },
+                    {
+                        "text": "organ Policji musi zwrócić się do sądu o ukaranie;",
+                        "isCorrect": false
+                    }
+                ]
+            }
+            ,
+                {
+                    "question": "Osoba posiadająca pozwolenie na broń jest obowiązana w razie zmiany miejsca zamieszkania zawiadomić o tym fakcie pisemnie organ Policji, właściwy ze względu na nowe miejsce zamieszkania w terminie:",
+                    "select": -1,
+                    "answers": [
+                        {
+                            "text": "14 dni od dnia zmiany miejsca zamieszkania;",
+                            "isCorrect": true
+                        },
+                        {
+                            "text": "30 dni od dnia zmiany miejsca zamieszkania;",
+                            "isCorrect": false
+                        },
+                        {
+                            "text": "7 dni od dnia zmiany miejsca zamieszkania;",
+                            "isCorrect": false
+                        }
+                    ]
+                },
+                {
+                    "question": "Przesyłanie broni lub amunicji za pośrednictwem podmiotów zajmujących się przewożeniem i doręczaniem przesyłek jest:",
+                    "select": -1,
+                    "answers": [
+                        {
+                            "text": "dozwolone, wyłącznie za pośrednictwem operatorów świadczących tego rodzaju usługi;",
+                            "isCorrect": true
+                        },
+                        {
+                            "text": "zabronione;",
+                            "isCorrect": false
+                        },
+                        {
+                            "text": "dozwolone, pod warunkiem wcześniejszego uzyskania zgody organu Policji;",
+                            "isCorrect": false
+                        }
+                    ]
+                },
+                {
+                    "question": "Przywóz broni i amunicji z państw nie będących członkami Unii Europejskiej przez obywateli polskich wymaga:",
+                    "select": -1,
+                    "answers": [
+                        {
+                            "text": "posiadania zaświadczenia wydanego przez właściwego konsula Rzeczypospolitej Polskiej;",
+                            "isCorrect": true
+                        },
+                        {
+                            "text": "uzyskania zezwolenia na granicy;",
+                            "isCorrect": false
+                        },
+                        {
+                            "text": "nie wymaga dodatkowych dokumentów;",
+                            "isCorrect": false
+                        }
+                    ]
+                },
+                {
+                    "question": "Wywóz broni i amunicji do niej za granicę przez obywateli polskich wymaga:",
+                    "select": -1,
+                    "answers": [
+                        {
+                            "text": "wydania Europejskiej karty broni palnej lub zgody właściwego organu Policji;",
+                            "isCorrect": true
+                        },
+                        {
+                            "text": "posiadania paszportu;",
+                            "isCorrect": false
+                        },
+                        {
+                            "text": "uzyskania zezwolenia od ambasady kraju docelowego;",
+                            "isCorrect": false
+                        }
+                    ]
+                },
+                {
+                    "question": "Zaświadczenia uprawniające do nabycia broni traci swoją ważność:",
+                    "select": -1,
+                    "answers": [
+                        {
+                            "text": "po upływie trzech miesięcy od daty jego wystawienia;",
+                            "isCorrect": true
+                        },
+                        {
+                            "text": "po upływie roku od daty jego wystawienia;",
+                            "isCorrect": false
+                        },
+                        {
+                            "text": "po upływie sześciu miesięcy od daty jego wystawienia;",
+                            "isCorrect": false
+                        }
+                    ]
+                },
+                {
+                    "question": "Czy osoba zgłaszająca przywóz broni i amunicji z zagranicy, a nie posiada pozwolenia na broń, jest obowiązana do niezwłocznego złożenia przywiezionej broni i amunicji do depozytu właściwego organu celnego:",
+                    "select": -1,
+                    "answers": [
+                        {
+                            "text": "tak",
+                            "isCorrect": true
+                        },
+                        {
+                            "text": "nie",
+                            "isCorrect": false
+                        }
+                    ]
+                },
+                {
+                    "question": "W rozumieniu ustawy o broni i amunicji noszenie broni oznacza:",
+                    "select": -1,
+                    "answers": [
+                        {
+                            "text": "każdy sposób przemieszczania załadowanej broni przez osobę posiadającą broń;",
+                            "isCorrect": true
+                        },
+                        {
+                            "text": "przechowywanie broni w bezpiecznym miejscu;",
+                            "isCorrect": false
+                        },
+                        {
+                            "text": "korzystanie z broni w celach obronnych;",
+                            "isCorrect": false
+                        }
+                    ]
+                },
+                {
+                    "question": "Broń palna oraz inna broń zdolna do rażenia celów na odległość może być używana w celach szkoleniowych i sportowych:",
+                    "select": -1,
+                    "answers": [
+                        {
+                            "text": "tylko na strzelnicach;",
+                            "isCorrect": true
+                        },
+                        {
+                            "text": "w dowolnych miejscach na zewnątrz;",
+                            "isCorrect": false
+                        },
+                        {
+                            "text": "w miejscach prywatnych;",
+                            "isCorrect": false
+                        }
+                    ]
+                },
+                {
+                    "question": "Zbywający broń i amunicję do tej broni obowiązany jest :",
+                    "select": -1,
+                    "answers": [
+                        {
+                            "text": "niezwłocznie powiadomić pisemnie o tym fakcie właściwy organ Policji;",
+                            "isCorrect": true
+                        },
+                        {
+                            "text": "przekazać broń i amunicję bezpośrednio osobie zainteresowanej;",
+                            "isCorrect": false
+                        },
+                        {
+                            "text": "ogłosić sprzedaż publicznie;",
+                            "isCorrect": false
+                        }
+                    ]
+                }
+                ,
+                    {
+                        "question": "Na wniosek szkoły, organizacji sportowej, Polskiego Związku Łowieckiego, stowarzyszenia obronnego pozwolenie na broń do celów sportowych lub łowieckich może być wydane osobie mającej ukończone:",
+                        "select": -1,
+                        "answers": [
+                            {
+                                "text": "18 lat",
+                                "isCorrect": true
+                            },
+                            {
+                                "text": "21 lat",
+                                "isCorrect": false
+                            },
+                            {
+                                "text": "16 lat",
+                                "isCorrect": false
+                            }
+                        ]
+                    },
+                    {
+                        "question": "Za ważną przyczynę wydania pozwolenia na broń do celów sportowych uważa się w szczególności:",
+                        "select": -1,
+                        "answers": [
+                            {
+                                "text": "udokumentowane członkostwo w stowarzyszeniu o charakterze strzeleckim, posiadanie kwalifikacji sportowych potwierdzonych 'patentem strzeleckim' oraz licencji właściwego polskiego związku sportowego;",
+                                "isCorrect": true
+                            },
+                            {
+                                "text": "posiadanie dowodu osobistego;",
+                                "isCorrect": false
+                            },
+                            {
+                                "text": "pełnoletniość",
+                                "isCorrect": false
+                            }
+                        ]
+                    },
+                    {
+                        "question": "Czy dopuszcza się zbywanie broni i amunicji pomiędzy osobami posiadającymi pozwolenie na broń:",
+                        "select": -1,
+                        "answers": [
+                            {
+                                "text": "tylko pomiędzy osobami posiadającymi pozwolenie na ten sam rodzaj broni;",
+                                "isCorrect": true
+                            },
+                            {
+                                "text": "pomiędzy dowolnymi osobami posiadającymi pozwolenie na broń;",
+                                "isCorrect": false
+                            },
+                            {
+                                "text": "tylko pomiędzy osobami posiadającymi pozwolenie na broń i zezwolenie na broń;",
+                                "isCorrect": false
+                            }
+                        ]
+                    },
+                    {
+                        "question": "Broń zakupioną na podstawie zaświadczenia uprawniającego do nabycia broni należy zarejestrować w ciągu:",
+                        "select": -1,
+                        "answers": [
+                            {
+                                "text": "5 dni od daty zakupu;",
+                                "isCorrect": true
+                            },
+                            {
+                                "text": "10 dni od daty zakupu;",
+                                "isCorrect": false
+                            },
+                            {
+                                "text": "14 dni od daty zakupu;",
+                                "isCorrect": false
+                            }
+                        ]
+                    },
+                    {
+                        "question": "Osoby fizyczne posiadające broń palną i amunicję do niej, są obowiązane przechowywać ją:",
+                        "select": -1,
+                        "answers": [
+                            {
+                                "text": "w kasetach metalowych na trwałe przymocowanych do elementów konstrukcyjnych budynku lub metalowych szafach albo sejfach, posiadających zamki atestowane;",
+                                "isCorrect": true
+                            },
+                            {
+                                "text": "w dowolnym miejscu w domu;",
+                                "isCorrect": false
+                            },
+                            {
+                                "text": "w szafie biurowej;",
+                                "isCorrect": false
+                            }
+                        ]
+                    },
+                    {
+                        "question": "Czy dozwolone jest dokonywanie przeróbek broni zmieniających jej rodzaj, kaliber ub przeznaczenie:",
+                        "select": -1,
+                        "answers": [
+                            {
+                                "text": "nie;",
+                                "isCorrect": true
+                            },
+                            {
+                                "text": "tak, pod warunkiem zgody właściwego organu Policji;",
+                                "isCorrect": false
+                            },
+                            {
+                                "text": "tak, bez konieczności uzyskania zgody;",
+                                "isCorrect": false
+                            }
+                        ]
+                    },
+                    {
+                        "question": "Posiadacz broni, w przypadku jej utraty, zobowiązany jest niezwłocznie powiadomić o tym fakcie Policję, nie później jednak niż w ciągu:",
+                        "select": -1,
+                        "answers": [
+                            {
+                                "text": "24 godziny od chwili stwierdzenia utraty broni;",
+                                "isCorrect": true
+                            },
+                            {
+                                "text": "48 godzin od chwili stwierdzenia utraty broni;",
+                                "isCorrect": false
+                            },
+                            {
+                                "text": "72 godzin od chwili stwierdzenia utraty broni;",
+                                "isCorrect": false
+                            }
+                        ]
+                    }
+                    ,
+                        {
+                            "question": "Amunicją szczególnie niebezpieczną jest:",
+                            "select": -1,
+                            "answers": [
+                                {
+                                    "text": "amunicja wytworzona niefabrycznie, w tym także taka, do której wytworzenia wykorzystywane są fabrycznie nowe elementy amunicji, z wyłączeniem amunicji wytwarzanej na własny użytek przez osoby posiadające pozwolenie na broń myśliwską, sportową lub kolekcjonerską;",
+                                    "isCorrect": true
+                                },
+                                {
+                                    "text": "amunicja fabrycznie wyprodukowana przez renomowane firmy",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "text": "amunicja myśliwska",
+                                    "isCorrect": false
+                                }
+                            ]
+                        },
+                        {
+                            "question": "Zaświadczenie uprawniające do nabycia broni ważne jest:",
+                            "select": -1,
+                            "answers": [
+                                {
+                                    "text": "trzy miesiące;",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "text": "6 miesięcy;",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "text": "12 miesięcy;",
+                                    "isCorrect": false
+                                }
+                            ]
+                        },
+                        {
+                            "question": "Broń palną można posiadać wyłącznie:",
+                            "select": -1,
+                            "answers": [
+                                {
+                                    "text": "na podstawie pozwolenia na broń wydanego przez właściwego ze względu na miejsce stałego pobytu zainteresowanej osoby lub siedzibę zainteresowanego podmiotu, komendanta wojewódzkiego Policji,\na w przypadku żołnierzy zawodowych - na podstawie pozwolenia wydanego przez właściwego komendanta oddziału Żandarmerii Wojskowej;",
+                                    "isCorrect": true
+                                },
+                                {
+                                    "text": "na podstawie dowodu osobistego",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "text": "na podstawie licencji na broń",
+                                    "isCorrect": false
+                                }
+                            ]
+                        },
+                        {
+                            "question": "Czy organy Policji mogą ograniczyć lub wykluczyć możliwość noszenia broni:",
+                            "select": -1,
+                            "answers": [
+                                {
+                                    "text": "tak;",
+                                    "isCorrect": true
+                                },
+                                {
+                                    "text": "nie;",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "text": "tylko w przypadku osób niepełnoletnich;",
+                                    "isCorrect": false
+                                }
+                            ]
+                        },
+                        {
+                            "question": "Nabywca broni ma obowiązek ją zarejestrować w ciągu:",
+                            "select": -1,
+                            "answers": [
+                                {
+                                    "text": "5 dni od dnia zakupu;",
+                                    "isCorrect": true
+                                },
+                                {
+                                    "text": "7 dni od dnia zakupu;",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "text": "10 dni od dnia zakupu;",
+                                    "isCorrect": false
+                                }
+                            ]
+                        },
+                        {
+                            "question": "Pozwolenie na broń - z wyłączeniem broni sportowej i myśliwskiej - wydaje się osobie, która ukończyła:",
+                            "select": -1,
+                            "answers": [
+                                {
+                                    "text": "21 rok życia;",
+                                    "isCorrect": true
+                                },
+                                {
+                                    "text": "18 rok życia;",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "text": "25 rok życia;",
+                                    "isCorrect": false
+                                }
+                            ]
+                        },
+                        {
+                            "question": "Czy osoba występująca z wnioskiem o wydanie pozwolenia na broń, obowiązana jest dołączyć do niego orzeczenie lekarskie i psychologiczne:",
+                            "select": -1,
+                            "answers": [
+                                {
+                                    "text": "tak;",
+                                    "isCorrect": true
+                                },
+                                {
+                                    "text": "nie;",
+                                    "isCorrect": false
+                                }
+                            ]
+                        },
+                        {
+                            "question": "Osoba posiadająca pozwolenie na broń do celów sportowych jest obowiązana przedstawić właściwemu organowi Policji aktualne orzeczenie lekarskie i psychologiczne:",
+                            "select": -1,
+                            "answers": [
+                                {
+                                    "text": "nie ma takiego obowiązku;",
+                                    "isCorrect": true
+                                },
+                                {
+                                    "text": "tak;",
+                                    "isCorrect": false
+                                }
+                            ]
+                        },
+                        {
+                            "question": "Czy organy Policji mają prawo zobowiązać posiadacza pozwolenia na broń, poddaniu się badaniom lekarskim i psychologicznym:",
+                            "select": -1,
+                            "answers": [
+                                {
+                                    "text": "tylko w przypadku, gdy istnieje uzasadnione podejrzenie, że osoba taka wykazuje istotne zaburzenia funkcjonowania psychologicznego, uzależnienie od alkoholu lub substancji psychoaktywnych, ograniczoną sprawność psychofizyczną oraz zaburzenia psychiczne, o których mowa w ustawie o ochronie zdrowia psychicznego;",
+                                    "isCorrect": true
+                                },
+                                {
+                                    "text": "nie, organy Policji nie mają takiego uprawnienia;",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "text": "tylko w przypadku osób niepełnoletnich;",
+                                    "isCorrect": false
+                                }
+                            ]
+                        },
+                        {
+                            "question": "Amunicję można nabywać na podstawie:",
+                            "select": -1,
+                            "answers": [
+                                {
+                                    "text": "legitymacji posiadacza broni lub świadectwa broni, wyłącznie dla tej broni, która jest określona w legitymacji albo na podstawie świadectwa broni i pisemnego zamówienia podmiotu uprawnionego do nabycia amunicji;",
+                                    "isCorrect": true
+                                },
+                                {
+                                    "text": "dowodu osobistego",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "text": "licencji na broń",
+                                    "isCorrect": false
+                                }
+                            ]
+                        },
+                        {
+                            "question": "Broń pneumatyczną można posiadać wyłącznie:",
+                            "select": -1,
+                            "answers": [
+                                {
+                                    "text": "na podstawie karty rejestracyjnej broni pneumatycznej wydanej przez właściwego ze względu na miejsce stałego pobytu zainteresowanej osoby lub siedzibę zainteresowanego podmiotu komendanta powiatowego Policji, a w przypadku żołnierzy zawodowych - właściwego komendanta oddziału Żandarmerii Wojskowej;",
+                                    "isCorrect": true
+                                },
+                                {
+                                    "text": "na podstawie dowodu osobistego",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "text": "na podstawie licencji na broń",
+                                    "isCorrect": false
+                                }
+                            ]
+                        },
+                        {
+                            "question": "Pozwolenia na broń nie wymaga się w przypadku:",
+                            "select": -1,
+                            "answers": [
+                                {
+                                    "text": "posiadania broni pneumatycznej;",
+                                    "isCorrect": true
+                                },
+                                {
+                                    "text": "posiadania broni palnej",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "text": "posiadania broni myśliwskiej",
+                                    "isCorrect": false
+                                }
+                            ]
+                        },
+                        {
+                            "question": "Pozwolenie na broń wydane do celów sportowych uprawnia do posiadania broni palnej:",
+                            "select": -1,
+                            "answers": [
+                                {
+                                    "text": "bocznego zapłonu z lufami gwintowanymi, o kalibrze do 6 mm;",
+                                    "isCorrect": true
+                                },
+                                {
+                                    "text": "centralnego zapłonu z lufami gwintowanymi o kalibrze do 12 mm;",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "text": "gładkolufowej;",
+                                    "isCorrect": false
+                                }
+                            ]
+                        },
+                        {
+                            "question": "Pozwolenie na broń wydane do celów sportowych uprawnia do posiadania broni palnej:",
+                            "select": -1,
+                            "answers": [
+                                {
+                                    "text": "centralnego zapłonu z lufami gwintowanymi o kalibrze do 12 mm;",
+                                    "isCorrect": true
+                                },
+                                {
+                                    "text": "bocznego zapłonu z lufami gwintowanymi, o kalibrze do 6 mm;",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "text": "gładkolufowej;",
+                                    "isCorrect": false
+                                }
+                            ]
+                        },
+                        {
+                            "question": "Pozwolenie na broń wydane do celów sportowych uprawnia do posiadania broni palnej:",
+                            "select": -1,
+                            "answers": [
+                                {
+                                    "text": "gładkolufowej;",
+                                    "isCorrect": true
+                                },
+                                {
+                                    "text": "bocznego zapłonu z lufami gwintowanymi, o kalibrze do 6 mm;",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "text": "centralnego zapłonu z lufami gwintowanymi o kalibrze do 12 mm;",
+                                    "isCorrect": false
+                                }
+                            ]
+                        },
+                        {
+                            "question": "Broń palną można posiadać wyłącznie:",
+                            "select": -1,
+                            "answers": [
+                                {
+                                    "text": "na podstawie pozwolenia na broń wydanego przez właściwego ze względu na miejsce stałego pobytu zainteresowanej osoby lub siedzibę zainteresowanego podmiotu komendanta wojewódzkiego Policji,\na w przypadku żołnierzy zawodowych – na podstawie pozwolenia wydanego przez właściwego komendanta oddziału Żandarmerii Wojskowej.",
+                                    "isCorrect": true
+                                },
+                                {
+                                    "text": "na podstawie licencji na broń",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "text": "na podstawie dowodu osobistego",
+                                    "isCorrect": false
+                                }
+                            ]
+                        }
+                    
+                        ,
+                            {
+                                "question": "Gotowe lub obrobione istotne części broni lub amunicji uważa się za broń lub amunicję:",
+                                "answers": [
+                                    {
+                                        "text": "tak",
+                                        "isCorrect": true
+                                    },
+                                    {
+                                        "text": "nie zawsze",
+                                        "isCorrect": false
+                                    },
+                                    {
+                                        "text": "to zależy",
+                                        "isCorrect": false
+                                    }
+                                ]
+                            },
+                            {
+                                "question": "Istotnymi częściami broni palnej są:",
+                                "answers": [
+                                    {
+                                        "text": "szkielet broni, baskila, lufa z komorą nabojową, komora zamkowa, zamek oraz bęben nabojowy",
+                                        "isCorrect": true
+                                    },
+                                    {
+                                        "text": "dłonie człowieka",
+                                        "isCorrect": false
+                                    },
+                                    {
+                                        "text": "opakowanie od gumy do żucia",
+                                        "isCorrect": false
+                                    }
+                                ]
+                            },
+                            {
+                                "question": "Bronią szczególnie niebezpieczną jest:",
+                                "answers": [
+                                    {
+                                        "text": "samoczynna broń palna, zdolna do rażenia celów na odległość",
+                                        "isCorrect": true
+                                    },
+                                    {
+                                        "text": "patyk",
+                                        "isCorrect": false
+                                    },
+                                    {
+                                        "text": "skarpetka",
+                                        "isCorrect": false
+                                    }
+                                ]
+                            },
+                            {
+                                "question": "Bronią szczególnie niebezpieczną jest:",
+                                "answers": [
+                                    {
+                                        "text": "broń palna, wyposażona w tłumik huku lub przystosowana do strzelania z użyciem tłumika huku",
+                                        "isCorrect": true
+                                    },
+                                    {
+                                        "text": "koc",
+                                        "isCorrect": false
+                                    },
+                                    {
+                                        "text": "kluczyk do samochodu",
+                                        "isCorrect": false
+                                    }
+                                ]
+                            },
+                            {
+                                "question": "Która z niżej wymienionych odpowiedzi stanowi definicję broni palnej:",
+                                "answers": [
+                                    {
+                                        "text": "każda przenośna broń lufowa, która miota, jest przeznaczona do miotania lub może być przystosowana do miotania jednego lub większej liczby pocisków lub substancji w wyniku działania materiału miotającego",
+                                        "isCorrect": true
+                                    },
+                                    {
+                                        "text": "stół do ping ponga",
+                                        "isCorrect": false
+                                    },
+                                    {
+                                        "text": "sztanga do ćwiczeń",
+                                        "isCorrect": false
+                                    }
+                                ]
+                            },
+                            {
+                                "question": "Amunicją są wyłącznie:",
+                                "answers": [
+                                    {
+                                        "text": "naboje przeznaczone do strzelania z broni palnej",
+                                        "isCorrect": true
+                                    },
+                                    {
+                                        "text": "pilka do piłki nożnej",
+                                        "isCorrect": false
+                                    },
+                                    {
+                                        "text": "długopis",
+                                        "isCorrect": false
+                                    }
+                                ]
+                            },
+                            {
+                                "question": "Bronią szczególnie niebezpieczną jest:",
+                                "answers": [
+                                    {
+                                        "text": "broń palna, której nie można wykryć przy pomocy urządzeń przeznaczonych do kontroli osób i bagażu",
+                                        "isCorrect": true
+                                    },
+                                    {
+                                        "text": "kubek do herbaty",
+                                        "isCorrect": false
+                                    },
+                                    {
+                                        "text": "okulary przeciwsłoneczne",
+                                        "isCorrect": false
+                                    }
+                                ]
+                            },
+                            {
+                                "question": "Istotnymi częściami amunicji są:",
+                                "answers": [
+                                    {
+                                        "text": "pociski wypełnione materiałami wybuchowymi, chemicznymi środkami obezwładniającymi lub zapalającymi albo innymi substancjami, których działanie zagraża życiu lub zdrowiu, spłonki inicjujące spalanie materiału miotającego i materiał miotający w postaci prochu strzelniczego",
+                                        "isCorrect": true
+                                    },
+                                    {
+                                        "text": "krzesło, stół, biurko",
+                                        "isCorrect": false
+                                    },
+                                    {
+                                        "text": "papier toaletowy",
+                                        "isCorrect": false
+                                    }
+                                ]
+                            },
+                            {
+                                "question": "Amunicją szczególnie niebezpieczną jest:",
+                                "answers": [
+                                    {
+                                        "text": "amunicja z pociskami podkalibrowymi, z płaszczem lub elementem wiodącym wykonanym z tworzyw sztucznych, z wyłączeniem amunicji przeznaczonej do strzelania z broni gładkolufowej",
+                                        "isCorrect": true
+                                    },
+                                    {
+                                        "text": "świnka morska",
+                                        "isCorrect": false
+                                    },
+                                    {
+                                        "text": "odkurzacz",
+                                        "isCorrect": false
+                                    }
+                                ]
+                            },
+                            {
+                                "question": "Czy wolno posiadać amunicję pistoletową i rewolwerową z pociskami półpłaszczowymi i rdzeniem konstrukcyjnie przystosowanym do rozrywania się po osiągnięciu przeszkody:",
+                                "answers": [
+                                    {
+                                        "text": "nie",
+                                        "isCorrect": true
+                                    },
+                                    {
+                                        "text": "tak",
+                                        "isCorrect": false
+                                    },
+                                    {
+                                        "text": "czasami",
+                                        "isCorrect": false
+                                    }
+                                ]
+                            },
+                            {
+                                "question": "Czy wolno posiadać amunicję wykonaną niefabrycznie, w tym także taką, do której wytworzenia wykorzystano fabrycznie nowe elementy amunicji:",
+                                "answers": [
+                                    {
+                                        "text": "tak, pod warunkiem, że amunicja ta została wytworzona na własny użytek przez osobę posiadającą pozwolenie na broń myśliwską, sportową lub kolekcjonerską",
+                                        "isCorrect": true
+                                    },
+                                    {
+                                        "text": "nie, w żadnym wypadku",
+                                        "isCorrect": false
+                                    },
+                                    {
+                                        "text": "tylko w wyjątkowych okolicznościach",
+                                        "isCorrect": false
+                                    }
+                                ]
+                            },
+                            {
+                                "question": "Bronią pneumatyczną jest wyłącznie:",
+                                "answers": [
+                                    {
+                                        "text": "niebezpieczne dla życia lub zdrowia urządzenie, które w wyniku działania sprężonego gazu jest zdolne do wystrzelenia pocisku z lufy lub elementu ją zastępującego i przez to do rażenia celu na odległość, a energia kinetyczna pocisku opuszczającego lufę lub element ją zastępujący przekracza 17J",
+                                        "isCorrect": true
+                                    },
+                                    {
+                                        "text": "pistolet do malowania",
+                                        "isCorrect": false
+                                    },
+                                    {
+                                        "text": "wiadro na piasek",
+                                        "isCorrect": false
+                                    }
+                                ]
+                            },
+                            {
+                                "question": "Bronią palną jest wyłącznie:",
+                                "answers": [
+                                    {
+                                        "text": "broń bojowa, myśliwska, sportowa, gazowa, alarmowa i sygnałowa",
+                                        "isCorrect": true
+                                    },
+                                    {
+                                        "text": "pędzel",
+                                        "isCorrect": false
+                                    },
+                                    {
+                                        "text": "maskotka",
+                                        "isCorrect": false
+                                    }
+                                ]
+                            },
+                            {
+                                "question": "Bronią szczególnie niebezpieczną jest:",
+                                "answers": [
+                                    {
+                                        "text": "broń palna wytworzona lub przerobiona w sposób pozwalający na zatajenie jej przeznaczenia, a także broń imitująca inne przedmioty",
+                                        "isCorrect": true
+                                    },
+                                    {
+                                        "text": "piłka do koszykówki",
+                                        "isCorrect": false
+                                    },
+                                    {
+                                        "text": "pluszowy miś",
+                                        "isCorrect": false
+                                    }
+                                ]
+                            },
+                            {
+                                "question": "Amunicją szczególnie niebezpieczną jest:",
+                                "answers": [
+                                    {
+                                        "text": "amunicja z pociskami wypełnionymi materiałami wybuchowymi, zapalającymi albo innymi substancjami, których działanie zagraża życiu lub zdrowiu oraz pociski do takiej amunicji",
+                                        "isCorrect": true
+                                    },
+                                    {
+                                        "text": "krzesło biurowe",
+                                        "isCorrect": false
+                                    },
+                                    {
+                                        "text": "kapelusz",
+                                        "isCorrect": false
+                                    }
+                                ]
+                            },
+                            {
+                                "question": "Amunicją szczególnie niebezpieczną jest:",
+                                "answers": [
+                                    {
+                                        "text": "amunicja z pociskami pełnopłaszczowymi zawierającymi rdzeń wykonany z materiału twardszego niż stop ołowiu",
+                                        "isCorrect": true
+                                    },
+                                    {
+                                        "text": "maska na twarz",
+                                        "isCorrect": false
+                                    },
+                                    {
+                                        "text": "okulary przeciwsłoneczne",
+                                        "isCorrect": false
+                                    }
+                                ]
+                            }
+                        
+                        
+                
+            
+        
+    
+    
+]
