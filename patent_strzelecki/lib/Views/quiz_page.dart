@@ -37,8 +37,11 @@ class _QuizPageState extends State<QuizPage> {
     });
   }
 
-  final databaseRef = FirebaseDatabase.instance.ref().child('patent-5e510-default-rtdb/europe-west1');
-  FirebaseFirestore firestore = FirebaseFirestore.instance;
+
+
+  //#################### DODANY KOD ####################
+  // final databaseRef = FirebaseDatabase.instance.ref().child('patent-5e510-default-rtdb/europe-west1');
+  // FirebaseFirestore firestore = FirebaseFirestore.instance;
 
   // void dodajDoKolekcji() async{
   //   for (var c in ['prawo_karne','uobia','regulamin','bezpieczenstwo','issf']){
@@ -53,6 +56,10 @@ class _QuizPageState extends State<QuizPage> {
   //     }
   //   }
   // }
+  //#################### DODANY KOD ####################
+
+
+
 
   // Future<void> dodajDaneDoFirebase(Map<String, dynamic> dane) async {
   //   try {
