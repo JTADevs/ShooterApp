@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:email_validator/email_validator.dart';
+import 'package:test/Data.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,10 +11,6 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    var email = "fredrikgmail.com";
-    print(EmailValidator.validate(email));
-
-
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
@@ -36,12 +32,19 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  List<Data> dataList = [];
   int _counter = 0;
 
   void _incrementCounter() {
     setState(() {
       _counter++;
     });
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
   }
 
   @override

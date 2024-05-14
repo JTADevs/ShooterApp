@@ -4,7 +4,7 @@
             "outputFile": "com.example.patent_strzelecki.app-mergeDebugResources-22:/values-tl/values-tl.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\jakub\\.gradle\\caches\\transforms-3\\5daea1fb7543e29f7b713d25ed4bc575\\transformed\\jetified-play-services-base-18.0.1\\res\\values-tl\\values.xml",
+                    "source": "C:\\Users\\jakub\\.gradle\\caches\\transforms-3\\b287b5caa6480e2b11a466697ef8496e\\transformed\\jetified-play-services-base-18.1.0\\res\\values-tl\\values.xml",
                     "from": {
                         "startLines": "4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20",
                         "startColumns": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
