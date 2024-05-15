@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:patent_strzelecki/Views/account_page.dart';
 import 'package:patent_strzelecki/Views/admin_page.dart';
 import 'package:patent_strzelecki/Views/question_page.dart';
 
@@ -14,6 +15,7 @@ class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
   final List<Widget> _widgetOptions = [
     AdminPage(),
+    //AccountPage(),
     Text('Test'),
     QuestionPage(),
     Text('Wyniki'),

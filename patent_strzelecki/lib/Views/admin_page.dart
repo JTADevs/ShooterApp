@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:intl/intl.dart'; // Import for date formatting
@@ -6,10 +8,15 @@ class AdminPage extends StatelessWidget {
   const AdminPage({super.key});
 
   Future<Map<String, String>> getUserData() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    String nickname = prefs.getString('nickname') ?? 'No nickname';
-    String gender = prefs.getString('gender') ?? 'No gender';
-    String examDate = prefs.getString('examDate') ?? 'No exam date set';
+    User user = FirebaseAuth.instance.currentUser!;
+    FirebaseFirestore firestore = FirebaseFirestore.instance;
+    DocumentReference referencja = firestore.collection('account').doc(user.uid);
+    DocumentSnapshot account = await referencja.get();
+    Map<String, dynamic>? dane = account.data() as Map<String, dynamic>?;
+    String nickname = dane?['nickname'] ?? 'No nickname';
+    String gender = dane?['gender'] ?? 'No gender';
+    String examDate = dane?['examDate'] ?? 'No exam date set';
+
     return {
       'nickname': nickname,
       'gender': gender,
@@ -25,7 +32,7 @@ class AdminPage extends StatelessWidget {
           future: getUserData(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return Center(child: CircularProgressIndicator());
+              return const Center(child: CircularProgressIndicator());
             }
 
             if (snapshot.hasError) {
@@ -33,7 +40,7 @@ class AdminPage extends StatelessWidget {
             }
 
             if (!snapshot.hasData) {
-              return Center(child: Text('No data available'));
+              return const Center(child: Text('No data available'));
             }
 
             Map<String, String> data = snapshot.data!;
@@ -57,7 +64,7 @@ class AdminPage extends StatelessWidget {
                           : 'Assets/images/male.webp'),
                     ),
                     title: Text('${data['nickname']} (${data['gender']})'),
-                    subtitle: Text('Admin'),
+                    subtitle: const Text('Admin'),
                   ),
                 ),
                 Wrap(
@@ -98,9 +105,9 @@ class AdminPage extends StatelessWidget {
                   size: 30), // Display an icon if provided
             Text(title,
                 style: TextStyle(color: Colors.grey[600], fontSize: 14.0)),
-            SizedBox(height: 8.0),
+            const SizedBox(height: 8.0),
             Text(value,
-                style: TextStyle(
+                style: const TextStyle(
                     color: Colors.black,
                     fontSize: 20.0,
                     fontWeight: FontWeight.bold)),

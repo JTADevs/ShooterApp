@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'home_page.dart'; // Załóżmy, że taki jest poprawny import Twojego HomePage
@@ -31,6 +33,15 @@ class _SetupProfilePageState extends State<SetupProfilePage> {
 
   Future<void> saveData() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
+    FirebaseFirestore firestore = FirebaseFirestore.instance;
+
+    User user = FirebaseAuth.instance.currentUser!;
+    firestore.collection('account').doc(user.uid).set({
+      'nickname': _nicknameController.text,
+      'gender': _gender,
+      'examDate': _examDate != null ? _examDate!.toIso8601String() : null
+    });
+
     await prefs.setString('nickname', _nicknameController.text);
     await prefs.setString('gender', _gender);
     if (_examDate != null) {

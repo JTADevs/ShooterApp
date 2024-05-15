@@ -54,8 +54,8 @@ class _RegistrationPageState extends State<RegistrationPage> {
             await _auth.signUp(_emailController.text, _passwordController.text);
         final SharedPreferences prefs = await SharedPreferences.getInstance();
         await prefs.setBool('isFirstLogin', true);
-        // Navigator.of(context).pushReplacement(
-        //     MaterialPageRoute(builder: (_) => SetupProfilePage()));
+        Navigator.of(context).pushReplacement(
+            MaterialPageRoute(builder: (_) => SetupProfilePage()));
       }
     } on FirebaseAuthException catch (e) {
       var errorMessage = 'Authentication failed';

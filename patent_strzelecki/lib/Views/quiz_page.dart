@@ -84,8 +84,10 @@ class _QuizPageState extends State<QuizPage> {
   }
   //#################### POBIERANIE PYTAŃ Z BAZY ####################
 
-  //#################### DODAWANIE PYTAŃ DO BAZY ####################
+  // CHYBA NIE POTRZEBNE
   // final databaseRef = FirebaseDatabase.instance.ref().child('patent-5e510-default-rtdb/europe-west1');
+
+  //#################### DODAWANIE PYTAŃ DO BAZY ####################
   // FirebaseFirestore firestore = FirebaseFirestore.instance;
 
   // void dodajDoKolekcji() async{
