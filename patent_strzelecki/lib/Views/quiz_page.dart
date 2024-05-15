@@ -38,8 +38,53 @@ class _QuizPageState extends State<QuizPage> {
   }
 
 
+  //#################### POBIERANIE PYTAŃ Z BAZY ####################
+  FirebaseFirestore firestore = FirebaseFirestore.instance;
 
-  //#################### DODANY KOD ####################
+  void pobierzZKolekcji(String category) async {
+    switch (category) {
+      case "Prawo Karne":
+        category = 'prawo_karne';
+      case "Ustawa o broni i amunicji":
+        category = 'uobia';
+      case "Regulamin Strzelecki":
+        category = 'regulamin';
+      case "Bezpieczeństwo w strzelectwie":
+        category = 'bezpieczenstwo';
+      default:
+        category = 'issf';
+    }
+
+    CollectionReference referencja = firestore.collection(category);
+
+    try {
+      // Pobierz dane z bazy danych
+      QuerySnapshot dane = await referencja.get();
+
+      // Iteruj przez dokumenty i dodaj je do bazy danych Firestore
+      List<Map<String, dynamic>> tmpList = [];
+      dane.docs.forEach((DocumentSnapshot d) async {
+        tmpList.add(d.data() as Map<String, dynamic>);
+      });
+      
+      setState(() {
+        questions = tmpList.map((questionData) {
+          List<dynamic> answers = List.from(questionData['answers']);
+          answers.shuffle();
+          return {
+            "question": questionData['question'],
+            "select": -1, // Reset selection for each question
+            "answers": answers,
+          };
+        }).toList();
+      });
+    } catch (error) {
+      print("Błąd pobierania danych: $error");
+    }
+  }
+  //#################### POBIERANIE PYTAŃ Z BAZY ####################
+
+  //#################### DODAWANIE PYTAŃ DO BAZY ####################
   // final databaseRef = FirebaseDatabase.instance.ref().child('patent-5e510-default-rtdb/europe-west1');
   // FirebaseFirestore firestore = FirebaseFirestore.instance;
 
@@ -56,7 +101,7 @@ class _QuizPageState extends State<QuizPage> {
   //     }
   //   }
   // }
-  //#################### DODANY KOD ####################
+  //#################### DODAWANIE PYTAŃ DO BAZY ####################
 
 
 
@@ -97,7 +142,8 @@ class _QuizPageState extends State<QuizPage> {
       });
     });
     // dodajDoKolekcji();
-    _loadQuestionsFromJson(_getJsonPath(widget.category));
+    pobierzZKolekcji(widget.category);
+    // _loadQuestionsFromJson(_getJsonPath(widget.category));
   }
 
   String _getJsonPath(String category) {
