@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:patent_strzelecki/Views/account_page.dart';
 import 'package:patent_strzelecki/Views/admin_page.dart';
 import 'package:patent_strzelecki/Views/question_page.dart';
+import 'package:patent_strzelecki/Views/setup_profile_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -15,10 +16,10 @@ class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
   final List<Widget> _widgetOptions = [
     AdminPage(),
-    //AccountPage(),
     Text('Test'),
     QuestionPage(),
     Text('Wyniki'),
+    SetupProfilePage(),
   ];
 
   final List<String> _appBarTitles = [
@@ -26,6 +27,7 @@ class _HomePageState extends State<HomePage> {
     'Test',
     'Pytania',
     'Wyniki',
+    'Profil',
   ];
 
   void _onItemTapped(int index) {
@@ -97,6 +99,7 @@ class _HomePageState extends State<HomePage> {
               BottomNavigationBarItem(
                   icon: Icon(Icons.question_answer), label: 'Pytania'),
               BottomNavigationBarItem(icon: Icon(Icons.score), label: 'Wyniki'),
+              BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profil'),
             ],
             currentIndex: _selectedIndex,
             selectedItemColor: Color.fromARGB(255, 0, 0, 0),

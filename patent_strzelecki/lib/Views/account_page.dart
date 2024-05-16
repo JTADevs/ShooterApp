@@ -8,10 +8,8 @@ class AccountPage extends StatelessWidget {
   const AccountPage({super.key});
 
   Future<Map<String, String>> getUserData() async {
-    User user = FirebaseAuth.instance.currentUser!;
-    FirebaseFirestore firestore = FirebaseFirestore.instance;
-    DocumentReference referencja = firestore.collection('account').doc(user.uid);
-    DocumentSnapshot account = await referencja.get();
+    // User user = FirebaseAuth.instance.currentUser!;
+    DocumentSnapshot account = await FirebaseFirestore.instance.collection('account').doc(FirebaseAuth.instance.currentUser!.uid).get();
     Map<String, dynamic>? dane = account.data() as Map<String, dynamic>?;
     String nickname = dane?['nickname'] ?? 'No nickname';
     String gender = dane?['gender'] ?? 'No gender';
@@ -40,7 +38,7 @@ class AccountPage extends StatelessWidget {
             }
 
             if (!snapshot.hasData) {
-              return Center(child: Text('No data available'));
+              return const Center(child: Text('No data available'));
             }
 
             Map<String, String> data = snapshot.data!;
