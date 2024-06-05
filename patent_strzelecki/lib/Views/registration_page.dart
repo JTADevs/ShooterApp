@@ -69,7 +69,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(errorMessage),
-          backgroundColor: Theme.of(context).errorColor,
+          // backgroundColor: Theme.of(context).errorColor,
         ),
       );
     }
