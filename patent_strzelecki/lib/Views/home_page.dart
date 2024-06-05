@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:patent_strzelecki/Views/account_page.dart';
+import 'package:patent_strzelecki/Views/statsPage.dart';
 import 'package:patent_strzelecki/Views/admin_page.dart';
 import 'package:patent_strzelecki/Views/question_page.dart';
+import 'package:patent_strzelecki/Views/score/testListPage.dart';
 import 'package:patent_strzelecki/Views/setup_profile_page.dart';
+import 'package:patent_strzelecki/Views/test/test_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -15,19 +17,11 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
   final List<Widget> _widgetOptions = [
-    AdminPage(),
-    Text('Test'),
+    StatisticsPage(),
+    TestPage(),
     QuestionPage(),
-    Text('Wyniki'),
-    SetupProfilePage(),
-  ];
-
-  final List<String> _appBarTitles = [
-    'Strona Główna',
-    'Test',
-    'Pytania',
-    'Wyniki',
-    'Profil',
+    TestListPage(),
+    AdminPage(),
   ];
 
   void _onItemTapped(int index) {
@@ -36,46 +30,15 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  // Poprawiona funkcja wylogowania
   void _logout() async {
     await FirebaseAuth.instance.signOut(); // Wylogowanie użytkownika z Firebase
 
- 
-    // Navigator.of(context).pushReplacementNamed(
-    //     '/login'); 
+    // Navigator.of(context).pushReplacementNamed('/login');
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(kToolbarHeight),
-        child: Container(
-          decoration: BoxDecoration(
-            color: Color.fromARGB(255, 69, 63, 63),
-            borderRadius: BorderRadius.vertical(bottom: Radius.circular(20)),
-            boxShadow: [
-              BoxShadow(
-                  color: Colors.black.withOpacity(0.5),
-                  offset: Offset(0, 2),
-                  blurRadius: 4.0)
-            ],
-          ),
-          child: AppBar(
-            backgroundColor: Colors.transparent,
-            title: Text(_appBarTitles[_selectedIndex],
-                style: TextStyle(
-                    color: Colors.white, fontWeight: FontWeight.bold)),
-            elevation: 0,
-            actions: [
-              IconButton(
-                icon: Icon(Icons.exit_to_app, size: 30, color: Colors.white),
-                onPressed: _logout, // Użycie poprawionej funkcji wylogowania
-              ),
-            ],
-          ),
-        ),
-      ),
       body: IndexedStack(
         index: _selectedIndex,
         children: _widgetOptions,
@@ -85,26 +48,40 @@ class _HomePageState extends State<HomePage> {
           color: Color.fromARGB(255, 69, 63, 63),
           boxShadow: [
             BoxShadow(
-                color: Colors.black.withOpacity(0.5),
-                offset: Offset(0, -1),
-                blurRadius: 4.0)
+              color: Colors.black.withOpacity(0.5),
+              offset: Offset(0, -1),
+              blurRadius: 4.0,
+            ),
           ],
         ),
         child: ClipRRect(
           child: BottomNavigationBar(
             items: const [
               BottomNavigationBarItem(
-                  icon: Icon(Icons.home), label: 'Strona Główna'),
-              BottomNavigationBarItem(icon: Icon(Icons.quiz), label: 'Test'),
+                icon: Icon(Icons.home),
+                label: 'Strona Główna',
+              ),
               BottomNavigationBarItem(
-                  icon: Icon(Icons.question_answer), label: 'Pytania'),
-              BottomNavigationBarItem(icon: Icon(Icons.score), label: 'Wyniki'),
-              BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profil'),
+                icon: Icon(Icons.quiz),
+                label: 'Test',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.question_answer),
+                label: 'Pytania',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.score),
+                label: 'Wyniki',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.person),
+                label: 'Profil',
+              ),
             ],
             currentIndex: _selectedIndex,
-            selectedItemColor: Color.fromARGB(255, 0, 0, 0),
-            unselectedItemColor:
-                Color.fromARGB(255, 64, 49, 49).withOpacity(0.6),
+            selectedItemColor: Color.fromARGB(255, 116, 111, 111),
+            unselectedItemColor: const Color.fromARGB(255, 7, 6, 6),
+            backgroundColor: Color.fromARGB(255, 0, 0, 0),
             onTap: _onItemTapped,
           ),
         ),

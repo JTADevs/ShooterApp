@@ -15,7 +15,6 @@ class RegistrationPage extends StatefulWidget {
 }
 
 class _RegistrationPageState extends State<RegistrationPage> {
-
   final GlobalKey<FormState> _formKey = GlobalKey();
 
   final Auth _auth = Auth();
@@ -69,7 +68,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(errorMessage),
-          // backgroundColor: Theme.of(context).errorColor,
+          backgroundColor: Theme.of(context).colorScheme.error, // Updated line
         ),
       );
     }

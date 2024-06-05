@@ -17,13 +17,16 @@ class _SetupProfilePageState extends State<SetupProfilePage> {
   DateTime? _examDate;
   String _imagePath = 'Assets/images/male.jpg'; // Default image path
 
-  
   @override
   void initState() {
-    FirebaseFirestore.instance.collection('account').doc(FirebaseAuth.instance.currentUser!.uid).get().then((value) {
+    FirebaseFirestore.instance
+        .collection('account')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .get()
+        .then((value) {
       Map<String, dynamic>? dane = value.data();
       print(dane);
-      if (dane != null){
+      if (dane != null) {
         _nicknameController.text = dane['nickname'] ?? 'No nickname';
         _gender = dane['gender'] ?? 'Male';
         _examDate = DateTime.parse(dane['examDate']);
@@ -50,7 +53,10 @@ class _SetupProfilePageState extends State<SetupProfilePage> {
 
   Future<Map<String, String>> getUserData() async {
     // User user = FirebaseAuth.instance.currentUser!;
-    DocumentSnapshot account = await FirebaseFirestore.instance.collection('account').doc(FirebaseAuth.instance.currentUser!.uid).get();
+    DocumentSnapshot account = await FirebaseFirestore.instance
+        .collection('account')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .get();
     Map<String, dynamic>? dane = account.data() as Map<String, dynamic>?;
     String nickname = dane?['nickname'] ?? 'No nickname';
     String gender = dane?['gender'] ?? 'No gender';
@@ -145,7 +151,8 @@ class _SetupProfilePageState extends State<SetupProfilePage> {
                   onPressed: saveData,
                   style: ElevatedButton.styleFrom(
                     foregroundColor: Colors.white,
-                    backgroundColor: Theme.of(context).primaryColor, // text color
+                    backgroundColor:
+                        Theme.of(context).primaryColor, // text color
                   ),
                   child: const Text('Save and Finish'),
                 ),
