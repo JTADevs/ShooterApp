@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:patent_strzelecki/Views/test/test_results_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'dart:math';
 
 class TestQuestionsPage extends StatefulWidget {
@@ -39,8 +40,8 @@ class _TestQuestionsPageState extends State<TestQuestionsPage> {
           await _firestore.collection(category['collection'] as String).get();
       final questions = querySnapshot.docs.map((doc) {
         final data = doc.data();
-        data['id'] = doc.id; // Add document ID to data
-        data['select'] = -1; // Add initial selection state
+        data['id'] = doc.id;
+        data['select'] = -1;
         return data;
       }).toList();
       questions.shuffle(random);
@@ -98,7 +99,35 @@ class _TestQuestionsPageState extends State<TestQuestionsPage> {
     });
   }
 
-  void _showCompletionDialog() {
+  Future<void> _saveTestResults() async {
+    final User? user = FirebaseAuth.instance.currentUser;
+
+    if (user != null) {
+      final userRef = _firestore.collection('users').doc(user.uid);
+
+      List<Map<String, dynamic>> answers = _questions.map((question) {
+        final selectedAnswer = question['select'];
+        final isCorrect = selectedAnswer != -1 &&
+            question['answers'][selectedAnswer]['isCorrect'] == true;
+
+        return {
+          'question': question['question'],
+          'selectedAnswer': selectedAnswer,
+          'isCorrect': isCorrect,
+          'answers': question['answers'],
+        };
+      }).toList();
+
+      await userRef.collection('test_results').add({
+        'timestamp': Timestamp.now(),
+        'answers': answers,
+        'correctAnswers': answers.where((answer) => answer['isCorrect']).length,
+        'totalQuestions': _questions.length,
+      });
+    }
+  }
+
+  void _showCompletionDialog() async {
     int correctAnswers = 0;
     for (var question in _questions) {
       int selectedIndex = question['select'];
@@ -110,6 +139,8 @@ class _TestQuestionsPageState extends State<TestQuestionsPage> {
 
     bool passed =
         correctAnswers >= 9; // Must have at least 9 correct answers to pass
+
+    await _saveTestResults(); // Save results automatically
 
     showDialog(
       context: context,
@@ -156,7 +187,7 @@ class _TestQuestionsPageState extends State<TestQuestionsPage> {
       return Scaffold(
         appBar: AppBar(
           title: Text('Test Questions'),
-          backgroundColor: Colors.grey[800], // Dark grey color
+          backgroundColor: Colors.grey[800],
         ),
         body: Center(
           child: CircularProgressIndicator(),
@@ -167,15 +198,19 @@ class _TestQuestionsPageState extends State<TestQuestionsPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Test Questions'),
-        backgroundColor: Colors.grey[800], // Dark grey color
+        backgroundColor: Colors.grey[800],
       ),
       body: PageView.builder(
         controller: _pageController,
-        physics:
-            NeverScrollableScrollPhysics(), // Disable scrolling to previous question
+        physics: const BouncingScrollPhysics(), // Enable scroll
         onPageChanged: (index) {
           setState(() {
-            _currentQuestionIndex = index;
+            if (index > _currentQuestionIndex) {
+              _currentQuestionIndex = index;
+            } else {
+              // Prevent moving to the previous question
+              _pageController.jumpToPage(_currentQuestionIndex);
+            }
           });
         },
         itemCount: _questions.length,
@@ -191,17 +226,17 @@ class _TestQuestionsPageState extends State<TestQuestionsPage> {
                     'Time remaining: ${_remainingTime ~/ 60}:${(_remainingTime % 60).toString().padLeft(2, '0')}',
                     style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   Text(
                     'Question ${index + 1}/${_questions.length}',
                     style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                   ),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   Text(
                     question['question'],
                     style: TextStyle(fontSize: 18),
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   ...question['answers'].map<Widget>((answer) {
                     final answerIndex = question['answers'].indexOf(answer);
                     final isSelected = answerIndex == question['select'];
@@ -227,41 +262,23 @@ class _TestQuestionsPageState extends State<TestQuestionsPage> {
                       ),
                     );
                   }).toList(),
-                  SizedBox(height: 20),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      ElevatedButton(
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.redAccent,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(18.0),
-                          ),
+                  const SizedBox(height: 20),
+                  Center(
+                    child: ElevatedButton(
+                      onPressed: _nextQuestion,
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.blueAccent,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(18.0),
                         ),
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 24.0, vertical: 12.0),
-                          child: Text('Quit Quiz'),
-                        ),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 48.0, vertical: 16.0),
                       ),
-                      ElevatedButton(
-                        onPressed: _nextQuestion,
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.blueAccent,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(18.0),
-                          ),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 24.0, vertical: 12.0),
-                          child: Text('Next'),
-                        ),
+                      child: const Text(
+                        'Next',
+                        style: TextStyle(fontSize: 18.0),
                       ),
-                    ],
+                    ),
                   ),
                 ],
               ),

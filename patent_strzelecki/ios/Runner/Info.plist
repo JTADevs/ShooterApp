@@ -60,5 +60,25 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+
+	<!-- Dodane klucze -->
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>fetch</string>
+		<string>remote-notification</string>
+	</array>
+
+	<key>UIUserNotificationSettings</key>
+	<dict/>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>We need your location to show nearby notifications.</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>We need your location to show nearby notifications.</string>
+
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Your location will be used to show relevant notifications.</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Your location will be used to show relevant notifications, even when the app is not running.</string>
+
 </dict>
 </plist>

@@ -21,8 +21,8 @@ class _QuizPageState extends State<QuizPage> {
 
   Future<void> _loadQuestionsFromJson(String jsonPath) async {
     String jsonContent = await rootBundle.loadString(jsonPath);
-    List<Map<String, dynamic>> jsonData = List<Map<String, dynamic>>.from(json.decode(jsonContent));
-
+    List<Map<String, dynamic>> jsonData =
+        List<Map<String, dynamic>>.from(json.decode(jsonContent));
 
     setState(() {
       questions = jsonData.map((questionData) {
@@ -37,8 +37,6 @@ class _QuizPageState extends State<QuizPage> {
     });
   }
 
-
-  //#################### POBIERANIE PYTAŃ Z BAZY ####################
   FirebaseFirestore firestore = FirebaseFirestore.instance;
 
   void pobierzZKolekcji(String category) async {
@@ -58,15 +56,13 @@ class _QuizPageState extends State<QuizPage> {
     CollectionReference referencja = firestore.collection(category);
 
     try {
-      // Pobierz dane z bazy danych
       QuerySnapshot dane = await referencja.get();
 
-      // Iteruj przez dokumenty i dodaj je do bazy danych Firestore
       List<Map<String, dynamic>> tmpList = [];
       dane.docs.forEach((DocumentSnapshot d) async {
         tmpList.add(d.data() as Map<String, dynamic>);
       });
-      
+
       setState(() {
         questions = tmpList.map((questionData) {
           List<dynamic> answers = List.from(questionData['answers']);
@@ -82,58 +78,6 @@ class _QuizPageState extends State<QuizPage> {
       print("Błąd pobierania danych: $error");
     }
   }
-  //#################### POBIERANIE PYTAŃ Z BAZY ####################
-
-  // CHYBA NIE POTRZEBNE
-  // final databaseRef = FirebaseDatabase.instance.ref().child('patent-5e510-default-rtdb/europe-west1');
-
-  //#################### DODAWANIE PYTAŃ DO BAZY ####################
-  // FirebaseFirestore firestore = FirebaseFirestore.instance;
-
-  // void dodajDoKolekcji() async{
-  //   for (var c in ['prawo_karne','uobia','regulamin','bezpieczenstwo','issf']){
-  //     CollectionReference referencja = firestore.collection(c);
-  //     List<Map<String, dynamic>> dane = List<Map<String, dynamic>>.from(json.decode(await rootBundle.loadString('Assets/baza/'+c+'.json')));
-  //     for (var d in dane) {
-  //       await referencja.add(d).then((DocumentReference document) {
-  //         print("Dokument dodany z ID: ${document.id}");
-  //       }).catchError((error) {
-  //         print("Błąd dodawania dokumentu: $error");
-  //       });
-  //     }
-  //   }
-  // }
-  //#################### DODAWANIE PYTAŃ DO BAZY ####################
-
-
-
-
-  // Future<void> dodajDaneDoFirebase(Map<String, dynamic> dane) async {
-  //   try {
-  //     // Inicjalizacja aplikacji Firebase (jeśli nie została jeszcze zainicjalizowana)
-  //     if (fb.apps.isEmpty) {
-  //       fb.initializeApp(
-  //         apiKey: "YOUR_API_KEY",
-  //         authDomain: "YOUR_AUTH_DOMAIN",
-  //         databaseURL: "YOUR_DATABASE_URL",
-  //         projectId: "YOUR_PROJECT_ID",
-  //         storageBucket: "YOUR_STORAGE_BUCKET",
-  //         messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-  //         appId: "YOUR_APP_ID",
-  //       );
-  //     }
-
-  //     // Pobranie referencji do lokalizacji w bazie danych
-  //     final fb.DatabaseReference ref = fb.database().ref("questions/prawo_karne");
-
-  //     // Dodanie danych do bazy danych
-  //     await ref.push().set(dane);
-
-  //     print("Dane zostały pomyślnie dodane do bazy Firebase.");
-  //   } catch (error) {
-  //     print("Wystąpił błąd podczas dodawania danych do bazy Firebase: $error");
-  //   }
-  // }
 
   @override
   void initState() {
@@ -143,16 +87,13 @@ class _QuizPageState extends State<QuizPage> {
         _currentQuestionIndex = _pageController.page!;
       });
     });
-    // dodajDoKolekcji();
     pobierzZKolekcji(widget.category);
-    // _loadQuestionsFromJson(_getJsonPath(widget.category));
   }
 
   String _getJsonPath(String category) {
     switch (category) {
       case "Prawo Karne":
         return 'Assets/Questions/prawo_karne.json';
-
       case "Ustawa o broni i amunicji":
         return 'Assets/Questions/uobia.json';
       case "Regulamin Strzelecki":
@@ -192,6 +133,7 @@ class _QuizPageState extends State<QuizPage> {
                 return QuestionPageWidget(
                   question: questions[index],
                   index: index,
+                  totalQuestions: questions.length, // Add this line
                   selectAnswer: (idx) => _selectAnswer(idx),
                 );
               },

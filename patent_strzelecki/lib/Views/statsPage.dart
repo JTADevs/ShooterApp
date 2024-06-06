@@ -20,7 +20,6 @@ class StatisticsPage extends StatelessWidget {
           ),
           flexibleSpace: Container(
             decoration: const BoxDecoration(
-              // AppBar gradient - you can change these colors
               gradient: LinearGradient(
                 colors: [Colors.black87, Colors.black54],
                 begin: Alignment.topLeft,
@@ -46,7 +45,6 @@ class StatisticsPage extends StatelessWidget {
         ),
         flexibleSpace: Container(
           decoration: const BoxDecoration(
-            // AppBar gradient - you can change these colors
             gradient: LinearGradient(
               colors: [Colors.black87, Colors.black54],
               begin: Alignment.topLeft,
@@ -102,7 +100,6 @@ class StatisticsPage extends StatelessWidget {
           double passRate =
               totalTests > 0 ? (passedTests / totalTests) * 100 : 0.0;
 
-          // Count the number of tests taken on each day of the week
           Map<int, Map<String, int>> testsByDayOfWeek = {
             1: {'passed': 0, 'failed': 0}, // Monday
             2: {'passed': 0, 'failed': 0}, // Tuesday
@@ -128,7 +125,6 @@ class StatisticsPage extends StatelessWidget {
             }
           }
 
-          // Track most frequently missed questions
           Map<String, int> missedQuestionsCount = {};
 
           for (var result in testResults) {
@@ -149,7 +145,6 @@ class StatisticsPage extends StatelessWidget {
             }
           }
 
-          // Get the top 5 most missed questions
           var sortedMissedQuestions = missedQuestionsCount.entries.toList()
             ..sort((a, b) => b.value.compareTo(a.value));
           var topMissedQuestions = sortedMissedQuestions.take(5);
@@ -158,13 +153,87 @@ class StatisticsPage extends StatelessWidget {
             padding: const EdgeInsets.all(16.0),
             child: ListView(
               children: [
+                // Highest and lowest scores on the top
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
+                      child: Card(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                        color: Colors.grey[850],
+                        margin: const EdgeInsets.only(right: 8.0),
+                        elevation: 8,
+                        shadowColor: Colors.black54,
+                        child: Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child: Column(
+                            children: [
+                              const Text(
+                                'Najwyższy wynik',
+                                style: TextStyle(
+                                  color: Colors.green,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              Text(
+                                '$highestScore',
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 24.0,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: Card(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                        color: Colors.grey[850],
+                        margin: const EdgeInsets.only(left: 8.0),
+                        elevation: 8,
+                        shadowColor: Colors.black54,
+                        child: Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child: Column(
+                            children: [
+                              const Text(
+                                'Najniższy wynik',
+                                style: TextStyle(
+                                  color: Colors.red,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              Text(
+                                '$lowestScore',
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 24.0,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 16.0),
+
+                // Bar chart showing tests by day of the week
                 Card(
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10.0),
                   ),
                   color: Colors.grey[850],
                   margin: const EdgeInsets.only(bottom: 16.0),
-                  // Adding box shadow
                   elevation: 8,
                   shadowColor: Colors.black54,
                   child: Padding(
@@ -308,87 +377,14 @@ class StatisticsPage extends StatelessWidget {
                     ),
                   ),
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Expanded(
-                      child: Card(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10.0),
-                        ),
-                        color: Colors.grey[850],
-                        margin: const EdgeInsets.only(right: 8.0),
-                        // Adding box shadow
-                        elevation: 8,
-                        shadowColor: Colors.black54,
-                        child: Padding(
-                          padding: const EdgeInsets.all(16.0),
-                          child: Column(
-                            children: [
-                              const Text(
-                                'Najwyższy wynik',
-                                style: TextStyle(
-                                  color: Colors.green,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              Text(
-                                '$highestScore',
-                                style: const TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 24.0,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                      child: Card(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10.0),
-                        ),
-                        color: Colors.grey[850],
-                        margin: const EdgeInsets.only(left: 8.0),
-                        // Adding box shadow
-                        elevation: 8,
-                        shadowColor: Colors.black54,
-                        child: Padding(
-                          padding: const EdgeInsets.all(16.0),
-                          child: Column(
-                            children: [
-                              const Text(
-                                'Najniższy wynik',
-                                style: TextStyle(
-                                  color: Colors.red,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              Text(
-                                '$lowestScore',
-                                style: const TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 24.0,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 16.0),
+
+                // Pass rate
                 Card(
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10.0),
                   ),
                   color: Colors.grey[850],
                   margin: const EdgeInsets.only(bottom: 16.0),
-                  // Adding box shadow
                   elevation: 8,
                   shadowColor: Colors.black54,
                   child: Padding(
@@ -414,12 +410,13 @@ class StatisticsPage extends StatelessWidget {
                     ),
                   ),
                 ),
+
+                // Most missed questions
                 Card(
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10.0),
                   ),
                   color: Colors.grey[850],
-                  // Adding box shadow
                   elevation: 8,
                   shadowColor: Colors.black54,
                   child: Padding(
