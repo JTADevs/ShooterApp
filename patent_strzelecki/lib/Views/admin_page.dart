@@ -2,7 +2,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AdminPage extends StatefulWidget {
   const AdminPage({super.key});
@@ -14,11 +17,34 @@ class AdminPage extends StatefulWidget {
 class _AdminPageState extends State<AdminPage> {
   late Future<Map<String, String>> _userDataFuture;
   String? _formattedDate;
+  bool _notificationsEnabled = false;
 
   @override
   void initState() {
     super.initState();
     _userDataFuture = getUserData();
+    _loadNotificationStatus();
+  }
+
+  Future<void> _loadNotificationStatus() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      _notificationsEnabled = prefs.getBool('notificationsEnabled') ?? false;
+    });
+  }
+
+  Future<void> _toggleNotifications() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    if (_notificationsEnabled) {
+      await _cancelNotifications();
+      prefs.setBool('notificationsEnabled', false);
+    } else {
+      await _scheduleNotifications();
+      prefs.setBool('notificationsEnabled', true);
+    }
+    setState(() {
+      _notificationsEnabled = !_notificationsEnabled;
+    });
   }
 
   Future<Map<String, String>> getUserData() async {
@@ -29,8 +55,6 @@ class _AdminPageState extends State<AdminPage> {
     DocumentSnapshot account = await referencja.get();
     Map<String, dynamic>? dane = account.data() as Map<String, dynamic>?;
     String nickname = dane?['nickname'] ?? 'No nickname';
-    String gender =
-        dane?['gender'] ?? 'male'; // Domyślnie 'male' jeśli nie podano płci
     String examDate = dane?['examDate'] ?? 'No exam date set';
 
     _formattedDate = 'No date set';
@@ -43,9 +67,70 @@ class _AdminPageState extends State<AdminPage> {
 
     return {
       'nickname': nickname,
-      'gender': gender,
       'examDate': examDate,
     };
+  }
+
+  Future<void> _scheduleNotifications() async {
+    final FlutterLocalNotificationsPlugin notificationsPlugin =
+        Provider.of<FlutterLocalNotificationsPlugin>(context, listen: false);
+
+    User user = FirebaseAuth.instance.currentUser!;
+    DocumentSnapshot userDoc = await FirebaseFirestore.instance
+        .collection('account')
+        .doc(user.uid)
+        .get();
+    String examDateString = userDoc['examDate'] ?? '';
+    DateTime? examDate;
+    try {
+      examDate = DateFormat('yyyy-MM-dd').parse(examDateString);
+    } catch (e) {
+      print("Error parsing exam date: $e");
+    }
+
+    if (examDate != null) {
+      DateTime startDate = examDate.subtract(const Duration(days: 7));
+      DateTime now = DateTime.now();
+      if (now.isBefore(startDate)) {
+        for (int i = 0; i < 7; i++) {
+          DateTime notificationDate = startDate.add(Duration(days: i));
+          await _scheduleNotification(
+              notificationsPlugin, notificationDate, examDate);
+        }
+      }
+    }
+  }
+
+  Future<void> _scheduleNotification(FlutterLocalNotificationsPlugin plugin,
+      DateTime date, DateTime examDate) async {
+    const AndroidNotificationDetails androidPlatformChannelSpecifics =
+        AndroidNotificationDetails(
+      'exam_channel',
+      'Exam Notifications',
+      channelDescription: 'Notifications about upcoming exams',
+      importance: Importance.max,
+      priority: Priority.high,
+    );
+
+    const NotificationDetails platformChannelSpecifics =
+        NotificationDetails(android: androidPlatformChannelSpecifics);
+
+    String formattedDate = DateFormat('dd/MM/yyyy').format(examDate);
+
+    await plugin.schedule(
+      date.millisecondsSinceEpoch ~/ 1000,
+      'Upcoming Exam',
+      'Your exam is on $formattedDate. Prepare yourself!',
+      date,
+      platformChannelSpecifics,
+      androidAllowWhileIdle: true,
+    );
+  }
+
+  Future<void> _cancelNotifications() async {
+    final FlutterLocalNotificationsPlugin notificationsPlugin =
+        Provider.of<FlutterLocalNotificationsPlugin>(context, listen: false);
+    await notificationsPlugin.cancelAll();
   }
 
   Future<void> _selectExamDate(BuildContext context) async {
@@ -77,11 +162,10 @@ class _AdminPageState extends State<AdminPage> {
   }
 
   Future<void> _logout() async {
-    await FirebaseAuth.instance.signOut(); // Wylogowanie użytkownika z Firebase
+    await FirebaseAuth.instance.signOut();
 
     if (!mounted) return;
-    Navigator.of(context)
-        .pushReplacementNamed('/login'); // Przekierowanie na stronę logowania
+    Navigator.of(context).pushReplacementNamed('/login');
   }
 
   @override
@@ -90,7 +174,7 @@ class _AdminPageState extends State<AdminPage> {
       theme: ThemeData(
         brightness: Brightness.light,
         primarySwatch: Colors.orange,
-        cardColor: Colors.grey[850], // Dark background for cards
+        cardColor: Colors.grey[850],
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
             foregroundColor: Colors.white,
@@ -144,14 +228,6 @@ class _AdminPageState extends State<AdminPage> {
 
                 Map<String, String> data = snapshot.data!;
                 String nickname = data['nickname'] ?? 'No nickname';
-                String gender = data['gender'] ?? 'male';
-
-                String avatarImage;
-                if (gender.toLowerCase() == 'female') {
-                  avatarImage = 'Assets/images/female.webp';
-                } else {
-                  avatarImage = 'Assets/images/male.webp';
-                }
 
                 return Column(
                   children: <Widget>[
@@ -165,17 +241,20 @@ class _AdminPageState extends State<AdminPage> {
                         padding: const EdgeInsets.all(16.0),
                         child: Row(
                           children: [
-                            CircleAvatar(
-                              radius: 40,
-                              backgroundImage: AssetImage(avatarImage),
+                            const Icon(
+                              Icons.person,
+                              size: 40,
+                              color: Colors.white,
                             ),
                             const SizedBox(width: 20),
-                            Text(
-                              nickname,
-                              style: const TextStyle(
-                                fontSize: 24,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
+                            Expanded(
+                              child: Text(
+                                nickname,
+                                style: const TextStyle(
+                                  fontSize: 24,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                ),
                               ),
                             ),
                           ],
@@ -198,7 +277,7 @@ class _AdminPageState extends State<AdminPage> {
                         ),
                         subtitle: Text(
                           _formattedDate ?? 'No date set',
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
                           ),
@@ -250,8 +329,12 @@ class _AdminPageState extends State<AdminPage> {
                             color: Colors.white,
                           ),
                         ),
-                        trailing: const Icon(Icons.chevron_right),
-                        onTap: () {},
+                        trailing: Switch(
+                          value: _notificationsEnabled,
+                          onChanged: (bool value) {
+                            _toggleNotifications();
+                          },
+                        ),
                       ),
                     ),
                     const Padding(

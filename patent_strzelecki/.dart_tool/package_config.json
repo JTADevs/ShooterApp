@@ -98,6 +98,12 @@
       "languageVersion": "3.1"
     },
     {
+      "name": "dbus",
+      "rootUri": "file:///Users/tymekpalak/.pub-cache/hosted/pub.dev/dbus-0.7.10",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
       "name": "email_validator",
       "rootUri": "file:///Users/tymekpalak/.pub-cache/hosted/pub.dev/email_validator-2.1.17",
       "packageUri": "lib/",
@@ -123,9 +129,9 @@
     },
     {
       "name": "file",
-      "rootUri": "file:///Users/tymekpalak/.pub-cache/hosted/pub.dev/file-7.0.0",
+      "rootUri": "file:///Users/tymekpalak/.pub-cache/hosted/pub.dev/file-6.1.4",
       "packageUri": "lib/",
-      "languageVersion": "3.0"
+      "languageVersion": "2.12"
     },
     {
       "name": "file_selector_linux",
@@ -228,6 +234,24 @@
       "rootUri": "file:///Users/tymekpalak/.pub-cache/hosted/pub.dev/flutter_lints-4.0.0",
       "packageUri": "lib/",
       "languageVersion": "3.1"
+    },
+    {
+      "name": "flutter_local_notifications",
+      "rootUri": "file:///Users/tymekpalak/.pub-cache/hosted/pub.dev/flutter_local_notifications-12.0.4",
+      "packageUri": "lib/",
+      "languageVersion": "2.15"
+    },
+    {
+      "name": "flutter_local_notifications_linux",
+      "rootUri": "file:///Users/tymekpalak/.pub-cache/hosted/pub.dev/flutter_local_notifications_linux-2.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.15"
+    },
+    {
+      "name": "flutter_local_notifications_platform_interface",
+      "rootUri": "file:///Users/tymekpalak/.pub-cache/hosted/pub.dev/flutter_local_notifications_platform_interface-6.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
     },
     {
       "name": "flutter_plugin_android_lifecycle",
@@ -476,6 +500,12 @@
       "languageVersion": "3.0"
     },
     {
+      "name": "process",
+      "rootUri": "file:///Users/tymekpalak/.pub-cache/hosted/pub.dev/process-4.2.4",
+      "packageUri": "lib/",
+      "languageVersion": "2.14"
+    },
+    {
       "name": "provider",
       "rootUri": "file:///Users/tymekpalak/.pub-cache/hosted/pub.dev/provider-6.1.2",
       "packageUri": "lib/",
@@ -584,6 +614,12 @@
       "languageVersion": "3.0"
     },
     {
+      "name": "timezone",
+      "rootUri": "file:///Users/tymekpalak/.pub-cache/hosted/pub.dev/timezone-0.9.3",
+      "packageUri": "lib/",
+      "languageVersion": "2.19"
+    },
+    {
       "name": "typed_data",
       "rootUri": "file:///Users/tymekpalak/.pub-cache/hosted/pub.dev/typed_data-1.3.2",
       "packageUri": "lib/",
@@ -663,9 +699,9 @@
     },
     {
       "name": "xdg_directories",
-      "rootUri": "file:///Users/tymekpalak/.pub-cache/hosted/pub.dev/xdg_directories-1.0.4",
+      "rootUri": "file:///Users/tymekpalak/.pub-cache/hosted/pub.dev/xdg_directories-0.2.0+3",
       "packageUri": "lib/",
-      "languageVersion": "3.0"
+      "languageVersion": "2.12"
     },
     {
       "name": "xml",
@@ -686,7 +722,7 @@
       "languageVersion": "3.3"
     }
   ],
-  "generated": "2024-06-04T16:39:31.866143Z",
+  "generated": "2024-06-06T16:31:40.504349Z",
   "generator": "pub",
   "generatorVersion": "3.4.0",
   "flutterRoot": "file:///Users/tymekpalak/Development/flutter",
