@@ -147,6 +147,10 @@ class _AdminPageState extends State<AdminPage> {
           firestore.collection('account').doc(user.uid);
       await referencja.update({
         'examDate': pickedDate.toIso8601String(),
+      }).catchError((v) => {
+        FirebaseFirestore.instance.collection('account').doc(user.uid).set({
+          'examDate': pickedDate.toIso8601String(),
+        })
       });
       setState(() {
         _formattedDate = DateFormat('dd/MM/yyyy').format(pickedDate);
