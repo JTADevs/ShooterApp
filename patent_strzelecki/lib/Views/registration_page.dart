@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-
 import 'package:patent_strzelecki/Service/auth.dart';
 import 'package:patent_strzelecki/Service/forgot_Password.dart';
-import 'package:patent_strzelecki/Views/setup_profile_page.dart';
+import 'package:patent_strzelecki/Views/home_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:email_validator/email_validator.dart';
 
@@ -27,13 +26,12 @@ class _RegistrationPageState extends State<RegistrationPage> {
 
   void _submit() async {
     if (!_formKey.currentState!.validate()) {
-      // Invalid!
       return;
     }
     _formKey.currentState!.save();
-    // setState(() {
-    //   _isAuthenticating = true;
-    // });
+    setState(() {
+      _isAuthenticating = true;
+    });
 
     try {
       if (!_isLogin &&
@@ -47,14 +45,15 @@ class _RegistrationPageState extends State<RegistrationPage> {
       if (_isLogin) {
         userCredential =
             await _auth.signIn(_emailController.text, _passwordController.text);
-        // Navigator.of(context).pushReplacementNamed('/home');
       } else {
         userCredential =
             await _auth.signUp(_emailController.text, _passwordController.text);
         final SharedPreferences prefs = await SharedPreferences.getInstance();
         await prefs.setBool('isFirstLogin', true);
-        Navigator.of(context).pushReplacement(
-            MaterialPageRoute(builder: (_) => SetupProfilePage()));
+
+        if (!mounted) return; // Check if the widget is still mounted
+        Navigator.of(context)
+            .pushReplacement(MaterialPageRoute(builder: (_) => HomePage()));
       }
     } on FirebaseAuthException catch (e) {
       var errorMessage = 'Authentication failed';
@@ -65,17 +64,22 @@ class _RegistrationPageState extends State<RegistrationPage> {
       } else {
         errorMessage = e.message ?? errorMessage;
       }
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(errorMessage),
-          backgroundColor: Theme.of(context).colorScheme.error, // Updated line
-        ),
-      );
+
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(errorMessage),
+            backgroundColor: Theme.of(context).colorScheme.error,
+          ),
+        );
+      }
     }
 
-    // setState(() {
-    //   _isAuthenticating = false;
-    // });
+    if (mounted) {
+      setState(() {
+        _isAuthenticating = false;
+      });
+    }
   }
 
   @override
@@ -95,9 +99,9 @@ class _RegistrationPageState extends State<RegistrationPage> {
                   children: [
                     const SizedBox(height: 50),
                     Image.asset(
-                      'Assets/images/shooter.png', // Upewnij się, że obraz jest dostępny
-                      height: 150, // Wysokość obrazu
-                      width: 150, // Szerokość obrazu
+                      'Assets/images/shooter.png', // Ensure the image exists
+                      height: 150,
+                      width: 150,
                     ),
                     TextFormField(
                       controller: _emailController,
@@ -125,7 +129,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                         labelText: 'Password',
                       ),
                     ),
-                    if (!_isLogin) // Tylko przy rejestracji dodajemy pole potwierdzenia hasła
+                    if (!_isLogin)
                       TextFormField(
                         controller: _confirmPasswordController,
                         validator: (value) {
@@ -161,8 +165,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                               child: const Text(
                                 'Forgot Password?',
                                 style: TextStyle(
-                                  color: Color.fromARGB(
-                                      255, 71, 24, 80), // Purple color
+                                  color: Color.fromARGB(255, 71, 24, 80),
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
@@ -176,8 +179,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
                             foregroundColor: Colors.white,
-                            backgroundColor:
-                                Color.fromARGB(255, 32, 31, 31), // foreground
+                            backgroundColor: Color.fromARGB(255, 32, 31, 31),
                             minimumSize: Size(300, 70),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(20),
@@ -187,16 +189,14 @@ class _RegistrationPageState extends State<RegistrationPage> {
                         child: Text(
                           _isLogin ? 'Login' : 'Sign Up',
                           style: TextStyle(
-                            fontWeight: FontWeight.bold, // Pogrubienie tekstu
+                            fontWeight: FontWeight.bold,
                             fontSize: 16,
                           ),
                         ),
                       ),
                     TextButton(
                       onPressed: () {
-                        // Resetuje stan formularza, czyści wszystkie bieżące błędy walidacji
                         _formKey.currentState?.reset();
-                        // Czyści wartości kontrolerów
                         _emailController.clear();
                         _passwordController.clear();
                         _confirmPasswordController.clear();
@@ -205,23 +205,23 @@ class _RegistrationPageState extends State<RegistrationPage> {
                         });
                       },
                       child: Text(
-                        style: TextStyle(
-                            color: const Color.fromARGB(255, 87, 23, 98),
-                            fontWeight: FontWeight.bold),
                         _isLogin
                             ? 'Create new account'
                             : 'I already have an account',
+                        style: TextStyle(
+                            color: const Color.fromARGB(255, 87, 23, 98),
+                            fontWeight: FontWeight.bold),
                       ),
                     ),
                     Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
-                        const SizedBox(height: 20), // Odstęp dla estetyki
+                        const SizedBox(height: 20),
                         Text(
                           'Or continue with',
                           style: TextStyle(color: Colors.grey[700]),
                         ),
-                        const SizedBox(height: 20), // Odstęp dla estetyki
+                        const SizedBox(height: 20),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
@@ -229,14 +229,11 @@ class _RegistrationPageState extends State<RegistrationPage> {
                               onTap: () async {
                                 Auth().signInWithGoogle();
                               },
-                              // Dodaj tutaj logikę logowania przez Google
-
                               child: Container(
-                                padding: const EdgeInsets.all(
-                                    8), // Padding wokół logo
+                                padding: const EdgeInsets.all(8),
                                 decoration: BoxDecoration(
-                                  shape: BoxShape.circle, // Kształt okręgu
-                                  color: Colors.white, // Tło białe
+                                  shape: BoxShape.circle,
+                                  color: Colors.white,
                                   boxShadow: [
                                     BoxShadow(
                                       color: Colors.black.withOpacity(0.1),
@@ -246,24 +243,22 @@ class _RegistrationPageState extends State<RegistrationPage> {
                                   ],
                                 ),
                                 child: Image.asset(
-                                  'Assets/images/google.png', // Upewnij się, że obraz jest dostępny
-                                  height: 50, // Wysokość obrazu
-                                  width: 50, // Szerokość obrazu
+                                  'Assets/images/google.png',
+                                  height: 50,
+                                  width: 50,
                                 ),
                               ),
                             ),
-                            const SizedBox(width: 30), // Przerwa między ikonami
+                            const SizedBox(width: 30),
                             GestureDetector(
                               onTap: () async {
                                 Auth().signInWithApple();
-                                // Dodaj tutaj logikę logowania przez Apple
                               },
                               child: Container(
-                                padding: const EdgeInsets.all(
-                                    8), // Padding wokół logo
+                                padding: const EdgeInsets.all(8),
                                 decoration: BoxDecoration(
-                                  shape: BoxShape.circle, // Kształt okręgu
-                                  color: Colors.white, // Tło białe
+                                  shape: BoxShape.circle,
+                                  color: Colors.white,
                                   boxShadow: [
                                     BoxShadow(
                                       color: Colors.black.withOpacity(0.1),
@@ -273,15 +268,15 @@ class _RegistrationPageState extends State<RegistrationPage> {
                                   ],
                                 ),
                                 child: Image.asset(
-                                  'Assets/images/apple.png', // Upewnij się, że obraz jest dostępny
-                                  height: 50, // Wysokość obrazu
-                                  width: 50, // Szerokość obrazu
+                                  'Assets/images/apple.png',
+                                  height: 50,
+                                  width: 50,
                                 ),
                               ),
                             ),
                           ],
                         ),
-                        const SizedBox(height: 30), // Odstęp na dole
+                        const SizedBox(height: 30),
                       ],
                     )
                   ],

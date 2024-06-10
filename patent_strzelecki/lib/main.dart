@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:patent_strzelecki/Views/home_page.dart';
 import 'package:patent_strzelecki/Views/registration_page.dart';
 import 'firebase_options.dart';
@@ -11,9 +12,8 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
-  ); // Inicjalizacja Firebase
+  );
 
-  // Inicjalizacja powiadomień
   final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
       FlutterLocalNotificationsPlugin();
 
@@ -40,7 +40,7 @@ void main() async {
 
 Future onDidReceiveLocalNotification(
     int id, String? title, String? body, String? payload) async {
-  // Możesz dodać tutaj logikę do obsługi powiadomień otrzymanych w aplikacji iOS
+  // Logic to handle notifications received in iOS
 }
 
 class MyApp extends StatelessWidget {
@@ -72,7 +72,6 @@ class AuthenticationWrapper extends StatelessWidget {
     return StreamBuilder<User?>(
       stream: FirebaseAuth.instance.authStateChanges(),
       builder: (context, snapshot) {
-        // Sprawdzamy, czy sesja użytkownika istnieje
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Scaffold(
             body: Center(child: CircularProgressIndicator()),
@@ -80,10 +79,8 @@ class AuthenticationWrapper extends StatelessWidget {
         }
 
         if (snapshot.hasData) {
-          // Użytkownik jest zalogowany
           return HomePage();
         }
-        // Użytkownik nie jest zalogowany
         return RegistrationPage();
       },
     );

@@ -202,17 +202,7 @@ class _TestQuestionsPageState extends State<TestQuestionsPage> {
       ),
       body: PageView.builder(
         controller: _pageController,
-        physics: const BouncingScrollPhysics(), // Enable scroll
-        onPageChanged: (index) {
-          setState(() {
-            if (index > _currentQuestionIndex) {
-              _currentQuestionIndex = index;
-            } else {
-              // Prevent moving to the previous question
-              _pageController.jumpToPage(_currentQuestionIndex);
-            }
-          });
-        },
+        physics: NeverScrollableScrollPhysics(), // Disable scroll
         itemCount: _questions.length,
         itemBuilder: (context, index) {
           final question = _questions[index];
@@ -274,8 +264,8 @@ class _TestQuestionsPageState extends State<TestQuestionsPage> {
                         padding: const EdgeInsets.symmetric(
                             horizontal: 48.0, vertical: 16.0),
                       ),
-                      child: const Text(
-                        'Next',
+                      child: Text(
+                        index == _questions.length - 1 ? 'Finish' : 'Next',
                         style: TextStyle(fontSize: 18.0),
                       ),
                     ),

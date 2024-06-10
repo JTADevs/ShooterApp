@@ -4,7 +4,6 @@ import 'package:patent_strzelecki/Views/statsPage.dart';
 import 'package:patent_strzelecki/Views/admin_page.dart';
 import 'package:patent_strzelecki/Views/question_page.dart';
 import 'package:patent_strzelecki/Views/score/testListPage.dart';
-import 'package:patent_strzelecki/Views/setup_profile_page.dart';
 import 'package:patent_strzelecki/Views/test/test_page.dart';
 
 class HomePage extends StatefulWidget {
@@ -30,9 +29,10 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  void _logout() async {
+  Future<void> _logout() async {
     await FirebaseAuth.instance.signOut(); // Wylogowanie użytkownika z Firebase
 
+    if (!mounted) return; // Ensure the widget is still in the widget tree
     // Navigator.of(context).pushReplacementNamed('/login');
   }
 

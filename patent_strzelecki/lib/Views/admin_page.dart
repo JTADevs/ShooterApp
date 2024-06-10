@@ -54,7 +54,7 @@ class _AdminPageState extends State<AdminPage> {
         firestore.collection('account').doc(user.uid);
     DocumentSnapshot account = await referencja.get();
     Map<String, dynamic>? dane = account.data() as Map<String, dynamic>?;
-    String nickname = dane?['nickname'] ?? 'No nickname';
+    String nickname = user.email ?? 'No email'; // Use user's email as nickname
     String examDate = dane?['examDate'] ?? 'No exam date set';
 
     _formattedDate = 'No date set';
@@ -148,10 +148,10 @@ class _AdminPageState extends State<AdminPage> {
       await referencja.update({
         'examDate': pickedDate.toIso8601String(),
       }).catchError((v) => {
-        FirebaseFirestore.instance.collection('account').doc(user.uid).set({
-          'examDate': pickedDate.toIso8601String(),
-        })
-      });
+            FirebaseFirestore.instance.collection('account').doc(user.uid).set({
+              'examDate': pickedDate.toIso8601String(),
+            })
+          });
       setState(() {
         _formattedDate = DateFormat('dd/MM/yyyy').format(pickedDate);
       });
@@ -231,7 +231,7 @@ class _AdminPageState extends State<AdminPage> {
                 }
 
                 Map<String, String> data = snapshot.data!;
-                String nickname = data['nickname'] ?? 'No nickname';
+                String nickname = data['nickname'] ?? 'No email';
 
                 return Column(
                   children: <Widget>[

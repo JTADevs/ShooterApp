@@ -74,25 +74,44 @@ class StatisticsPage extends StatelessWidget {
 
           final testResults = snapshot.data!.docs;
 
-          int totalTests = testResults.length;
-          int passedTests = testResults
+          // Get the start and end dates of the current week
+          DateTime now = DateTime.now();
+          DateTime startOfWeek = now.subtract(Duration(days: now.weekday - 1));
+          DateTime endOfWeek = startOfWeek.add(Duration(days: 6));
+
+          // Filter test results to only include those from the current week
+          List<QueryDocumentSnapshot> currentWeekResults =
+              testResults.where((result) {
+            Timestamp? timestamp = result['timestamp'] as Timestamp?;
+            if (timestamp != null) {
+              DateTime date = timestamp.toDate();
+              return date.isAfter(startOfWeek.subtract(Duration(days: 1))) &&
+                  date.isBefore(endOfWeek.add(Duration(days: 1)));
+            }
+            return false;
+          }).toList();
+
+          int totalTests = currentWeekResults.length;
+          int passedTests = currentWeekResults
               .where((result) => (result['correctAnswers'] ?? 0) >= 9)
               .length;
           int failedTests = totalTests - passedTests;
 
-          int totalCorrectAnswers = testResults.fold(
+          int totalCorrectAnswers = currentWeekResults.fold(
               0, (sum, result) => sum + (result['correctAnswers'] as int ?? 0));
           double averageScore =
               totalTests > 0 ? totalCorrectAnswers / totalTests : 0.0;
 
-          int highestScore = testResults.fold(
+          int highestScore = currentWeekResults.fold(
               0,
               (highest, result) => (result['correctAnswers'] ?? 0) > highest
                   ? (result['correctAnswers'] ?? 0)
                   : highest);
 
-          int lowestScore = testResults.fold(
-              (testResults.first['correctAnswers'] ?? 0),
+          int lowestScore = currentWeekResults.fold(
+              (currentWeekResults.isNotEmpty
+                  ? (currentWeekResults.first['correctAnswers'] ?? 0)
+                  : 0),
               (lowest, result) => (result['correctAnswers'] ?? 0) < lowest
                   ? (result['correctAnswers'] ?? 0)
                   : lowest);
@@ -110,7 +129,7 @@ class StatisticsPage extends StatelessWidget {
             7: {'passed': 0, 'failed': 0}, // Sunday
           };
 
-          for (var result in testResults) {
+          for (var result in currentWeekResults) {
             Timestamp? timestamp = result['timestamp'] as Timestamp?;
             if (timestamp != null) {
               DateTime date = timestamp.toDate();
@@ -127,7 +146,7 @@ class StatisticsPage extends StatelessWidget {
 
           Map<String, int> missedQuestionsCount = {};
 
-          for (var result in testResults) {
+          for (var result in currentWeekResults) {
             List<dynamic>? answers = result['answers'] as List<dynamic>?;
             if (answers != null) {
               for (var answer in answers) {
