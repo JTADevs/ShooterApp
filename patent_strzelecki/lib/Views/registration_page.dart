@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:patent_strzelecki/Service/auth.dart';
@@ -52,16 +53,21 @@ class _RegistrationPageState extends State<RegistrationPage> {
         final SharedPreferences prefs = await SharedPreferences.getInstance();
         await prefs.setBool('isFirstLogin', true);
 
+        User user = FirebaseAuth.instance.currentUser!;
+        await FirebaseFirestore.instance.collection('account').doc(user.uid).set({
+          'username': user.email?.split('@')[0],
+        });
+
         if (!mounted) return; // Check if the widget is still mounted
         Navigator.of(context)
             .pushReplacement(MaterialPageRoute(builder: (_) => HomePage()));
       }
     } on FirebaseAuthException catch (e) {
-      var errorMessage = 'Authentication failed';
+      var errorMessage = 'Błąd autoryzacji';
       if (e.code == 'email-already-in-use') {
-        errorMessage = 'This email address is already in use.';
+        errorMessage = 'Ten adres jest już w użyciu.';
       } else if (e.code == 'weak-password') {
-        errorMessage = 'The password provided is too weak.';
+        errorMessage = 'Hasło jest zbyt słabe.';
       } else {
         errorMessage = e.message ?? errorMessage;
       }
@@ -69,7 +75,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text(errorMessage),
+            content: const Text('Błędne dane'),
             backgroundColor: Theme.of(context).colorScheme.error,
           ),
         );
@@ -108,26 +114,26 @@ class _RegistrationPageState extends State<RegistrationPage> {
                       controller: _emailController,
                       validator: (value) {
                         if (value == null || !EmailValidator.validate(value)) {
-                          return 'Please enter a valid email address.';
+                          return 'Wprowadź prawidłowy adres email.';
                         }
                         return null;
                       },
                       keyboardType: TextInputType.emailAddress,
                       decoration: const InputDecoration(
-                        labelText: 'Email Address',
+                        labelText: 'Adres email',
                       ),
                     ),
                     TextFormField(
                       controller: _passwordController,
                       validator: (value) {
                         if (value == null || value.length < 7) {
-                          return 'Password must be at least 7 characters long.';
+                          return 'Hasło musi składać się z conajmniej 7 znaków.';
                         }
                         return null;
                       },
                       obscureText: true,
                       decoration: const InputDecoration(
-                        labelText: 'Password',
+                        labelText: 'Hasło',
                       ),
                     ),
                     if (!_isLogin)
@@ -137,13 +143,13 @@ class _RegistrationPageState extends State<RegistrationPage> {
                           if (value == null ||
                               value.isEmpty ||
                               value != _passwordController.text) {
-                            return 'Passwords must match.';
+                            return 'Hasła nie pasują do siebie.';
                           }
                           return null;
                         },
                         obscureText: true,
                         decoration: const InputDecoration(
-                          labelText: 'Confirm Password',
+                          labelText: 'Potwierdź hasło',
                         ),
                       ),
                     if (_isLogin)
@@ -164,7 +170,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                                 );
                               },
                               child: const Text(
-                                'Forgot Password?',
+                                'Zapomniałeś hasła?',
                                 style: TextStyle(
                                   color: Color.fromARGB(255, 71, 24, 80),
                                   fontWeight: FontWeight.bold,
@@ -188,7 +194,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                             elevation: 5),
                         onPressed: _submit,
                         child: Text(
-                          _isLogin ? 'Login' : 'Sign Up',
+                          _isLogin ? 'Zaloguj' : 'Zarejestruj',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 16,
@@ -207,8 +213,8 @@ class _RegistrationPageState extends State<RegistrationPage> {
                       },
                       child: Text(
                         _isLogin
-                            ? 'Create new account'
-                            : 'I already have an account',
+                            ? 'Stwórz nowe konto'
+                            : 'Mam już konto',
                         style: TextStyle(
                             color: const Color.fromARGB(255, 87, 23, 98),
                             fontWeight: FontWeight.bold),
@@ -219,7 +225,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                       children: <Widget>[
                         const SizedBox(height: 20),
                         Text(
-                          'Or continue with',
+                          'kontynuuj przy użyciu',
                           style: TextStyle(color: Colors.grey[700]),
                         ),
                         const SizedBox(height: 20),

@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +17,7 @@ class AdminPage extends StatefulWidget {
 }
 
 class _AdminPageState extends State<AdminPage> {
-  late Future<Map<String, String>> _userDataFuture;
+  late Future<Map<String, dynamic>> _userDataFuture;
   String? _formattedDate;
   bool _notificationsEnabled = false;
 
@@ -47,14 +49,16 @@ class _AdminPageState extends State<AdminPage> {
     });
   }
 
-  Future<Map<String, String>> getUserData() async {
+  Future<Map<String, dynamic>> getUserData() async {
     User user = FirebaseAuth.instance.currentUser!;
     FirebaseFirestore firestore = FirebaseFirestore.instance;
     DocumentReference referencja =
         firestore.collection('account').doc(user.uid);
     DocumentSnapshot account = await referencja.get();
     Map<String, dynamic>? dane = account.data() as Map<String, dynamic>?;
-    String nickname = user.email ?? 'No email'; // Use user's email as nickname
+    bool email_verified = user.emailVerified; // Use user's email as nickname
+    String nickname = dane?['nickname'] ?? user.email?.split('@')[0]; // Use user's email as nickname
+    // String nickname = user.email ?? 'No email'; // Use user's email as nickname
     String examDate = dane?['examDate'] ?? 'No exam date set';
 
     _formattedDate = 'No date set';
@@ -66,6 +70,7 @@ class _AdminPageState extends State<AdminPage> {
     }
 
     return {
+      'email_verified': email_verified,
       'nickname': nickname,
       'examDate': examDate,
     };
@@ -142,9 +147,7 @@ class _AdminPageState extends State<AdminPage> {
     );
     if (pickedDate != null) {
       User user = FirebaseAuth.instance.currentUser!;
-      FirebaseFirestore firestore = FirebaseFirestore.instance;
-      DocumentReference referencja =
-          firestore.collection('account').doc(user.uid);
+      DocumentReference referencja = FirebaseFirestore.instance.collection('account').doc(user.uid);
       await referencja.update({
         'examDate': pickedDate.toIso8601String(),
       }).catchError((v) => {
@@ -156,6 +159,22 @@ class _AdminPageState extends State<AdminPage> {
         _formattedDate = DateFormat('dd/MM/yyyy').format(pickedDate);
       });
     }
+  }
+
+  Future<void> _sendVerifyEmail() async {
+    FirebaseAuth.instance.currentUser!.sendEmailVerification();
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('Pomyślnie wysłano wiadomość', 
+          style: TextStyle(
+            color: Colors.black,
+            fontWeight: FontWeight.bold
+          )
+        ),
+        backgroundColor: Colors.green,
+      ),
+    );
   }
 
   Future<void> _launchURL() async {
@@ -215,7 +234,7 @@ class _AdminPageState extends State<AdminPage> {
           color: Colors.grey[200],
           padding: const EdgeInsets.all(8.0),
           child: SingleChildScrollView(
-            child: FutureBuilder<Map<String, String>>(
+            child: FutureBuilder<Map<String, dynamic>>(
               future: _userDataFuture,
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
@@ -230,7 +249,7 @@ class _AdminPageState extends State<AdminPage> {
                   return const Center(child: Text('No data available'));
                 }
 
-                Map<String, String> data = snapshot.data!;
+                Map<String, dynamic> data = snapshot.data!;
                 String nickname = data['nickname'] ?? 'No email';
 
                 return Column(
@@ -265,6 +284,32 @@ class _AdminPageState extends State<AdminPage> {
                         ),
                       ),
                     ),
+                    data['email_verified'] == false ?
+                    Card(
+                      margin: const EdgeInsets.symmetric(
+                          vertical: 8.0, horizontal: 16.0),
+                      color: Colors.grey[850],
+                      child: ListTile(
+                        leading: const Icon(Icons.mail,
+                            color: Colors.red),
+                        title: const Text(
+                          'Zweryfikuj adres email',
+                          style: TextStyle(
+                            color: Colors.red,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        subtitle: const Text(
+                          'Wyślij ponownie email weryfikacyjny',
+                          style: TextStyle(
+                            color: Colors.red,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        trailing: const Icon(Icons.chevron_right),
+                        onTap: () => _sendVerifyEmail(),
+                      ),
+                    ): Container(),
                     Card(
                       margin: const EdgeInsets.symmetric(
                           vertical: 8.0, horizontal: 16.0),

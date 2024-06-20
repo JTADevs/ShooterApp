@@ -1,1 +1,0 @@
- /Users/tymekpalak/Development/ShooterApp/patent_strzelecki/.dart_tool/flutter_build/44fe2c48efc5eab7ebca03ebaed62286/native_assets.yaml: 

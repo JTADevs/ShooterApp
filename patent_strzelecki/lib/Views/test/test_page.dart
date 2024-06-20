@@ -1,10 +1,11 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:patent_strzelecki/Views/test/test_question_page.dart';
 
 class TestPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return FirebaseAuth.instance.currentUser!.emailVerified ? Scaffold(
       appBar: AppBar(
         title: const Text(
           'Test',
@@ -85,9 +86,30 @@ class TestPage extends StatelessWidget {
                 ),
               ),
             ],
-          ),
+          )
         ),
       ),
+    ): const Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Icon(
+          Icons.email, // Użyj ikony odpowiedniej dla testu
+          size: 100,
+          color: Colors.red,
+        ),
+        SizedBox(height: 20),
+        Card(
+          margin: EdgeInsets.all(16.0),
+          child: Padding(
+            padding: EdgeInsets.all(16.0),
+            child: Text(
+              'Aby korzystać z aplikacji zweryfikuj swój adres email.',
+              style: TextStyle(fontSize: 18, color: Colors.black),
+            ),
+          ),
+        )
+      ],
     );
   }
 }
