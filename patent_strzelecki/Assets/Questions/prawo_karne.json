@@ -1,0 +1,129 @@
+[
+    {
+        "question": "Kto nosi broń po spożyciu alkoholu lub substancji psychotropowych albo podobnie działającego podlega:",
+        "select": -1,
+        "answers": [
+            {"text": "karze chłosty", "isCorrect": false},
+            {"text": "karze pozbawienia praw publicznych", "isCorrect": false},
+            {"text": "karze aresztu lub grzywny", "isCorrect": true}
+        ]
+    },
+    {
+        "question": "Kto porzuca broń palną lub amunicję do niej, która pozostaje w jego dyspozycji podlega:",
+        "select": -1,
+        "answers": [
+            {"text": "karze dożywotniego pozbawienia wolności", "isCorrect": false},
+            {"text": "karze nagannej reprymendy", "isCorrect": false},
+            {"text": "grzywnie, karze ograniczenia wolności albo pozbawienia wolności do 2 lat", "isCorrect": true}
+        ]
+    },
+    {
+        "question": "W stosunku do osoby, która nie dopełniła obowiązku rejestracji broni albo obowiązku zdania broni do depozytu można zastosować:",
+        "select": -1,
+        "answers": [
+            {"text": "nagrodę pieniężną", "isCorrect": false},
+            {"text": "karę niewielkiej opieki społecznej", "isCorrect": false},
+            {"text": "karę aresztu lub grzywny", "isCorrect": true}
+        ]
+    },
+    {
+        "question": "Kto bez wymaganej rejestracji posiada broń pneumatyczną albo zbywa osobie nieuprawnionej broń pneumatyczną albo miotacz gazu obezwładniającego lub narzędzie albo urządzenie, którego używanie może zagrażać życiu lub zdrowiu, podlega:",
+        "select": -1,
+        "answers": [
+            {"text": "nagrodzie państwowej", "isCorrect": false},
+            {"text": "nagrodzie literackiej", "isCorrect": false},
+            {"text": "karze aresztu lub grzywny", "isCorrect": true}
+        ]
+    },
+    {
+        "question": "Kto nie dopełnia obowiązku zawiadomienia Policji o utracie lub zbyciu innej osobie broni i amunicji do tej broni podlega:",
+        "select": -1,
+        "answers": [
+            {"text": "odznaczeniu za zasługi dla bezpieczeństwa publicznego", "isCorrect": false},
+            {"text": "karze nagannej reprymendy", "isCorrect": false},
+            {"text": "karze aresztu lub grzywny", "isCorrect": true}
+        ]
+    },
+    {
+        "question": "Kto posiadając pozwolenie na broń lub posiadając broń podlegającą rejestracji, która nie wymaga pozwolenia na broń, nie dopełnia obowiązku pisemnego zawiadomienia właściwego organu Policji o zmianie miejsca stałego pobytu w terminie 14 dni od dnia zmiany miejsca stałego pobytu podlega:",
+        "select": -1,
+        "answers": [
+            {"text": "karze łagodnej reprymendy", "isCorrect": false},
+            {"text": "nagrodzie za patriotyzm", "isCorrect": false},
+            {"text": "kary aresztu lub grzywny", "isCorrect": true}
+        ]
+    },
+
+    {
+        "question": "Kto nieumyślnie powoduje utratę broni palnej lub amunicji, która zgodnie z prawem pozostaje w jego dyspozycji, podlega wyłącznie:",
+        "select": -1,
+        "answers": [
+            {"text": "grzywnie, karze ograniczenia wolności albo pozbawienia wolności do 1 roku", "isCorrect": true},
+            {"text": "karze chłosty", "isCorrect": false},
+            {"text": "nagrodzie pieniężnej", "isCorrect": false}
+        ]
+    },
+    {
+        "question": "Stan wyższej konieczności jest to wyłącznie działanie w celu:",
+        "select": -1,
+        "answers": [
+            {"text": "uchylenia bezpośredniego niebezpieczeństwa grożącego jakiemukolwiek dobru chronionemu prawem, bądź ratowania dobra chronionego prawem, poświęcając dobro o wartości niższej od dobra ratowanego, jeżeli niebezpieczeństwa nie można uniknąć inaczej", "isCorrect": true},
+            {"text": "zamknięcia parkingu", "isCorrect": false},
+            {"text": "zabrania ulubionego serialu", "isCorrect": false}
+        ]
+    },
+    {
+        "question": "Obrona konieczna to działanie wyłącznie w celu:",
+        "select": -1,
+        "answers": [
+            {"text": "odparcia bezpośredniego, bezprawnego zamachu na jakiegokolwiek dobro chronione prawem", "isCorrect": true},
+            {"text": "sprzątnięcia kuchni", "isCorrect": false},
+            {"text": "zjedzenia pizzy", "isCorrect": false}
+        ]
+    },
+    {
+        "question": "Czy Sąd może odstąpić od wymierzenia kary w razie przekroczenia granicy obrony koniecznej:",
+        "select": -1,
+        "answers": [
+            {"text": "tak, gdy jej przekroczenie było wynikiem strachu lub wzburzenia usprawiedliwionego okolicznościami zamachu", "isCorrect": true},
+            {"text": "nie, nigdy", "isCorrect": false},
+            {"text": "tylko w przypadku deszczu", "isCorrect": false}
+        ]
+    },
+    {
+        "question": "Czy Sąd może odstąpić od wymierzenia kary bądź zastosować nadzwyczajne złagodzenie kary w razie przekroczenia granicy obrony koniecznej:",
+        "select": -1,
+        "answers": [
+            {"text": "tak, gdy sprawca działał w celu odparcia bezpośredniego, bezprawnego zamachu na jakiekolwiek dobro chronione prawem i zastosował sposób obrony niewspółmierny do niebezpieczeństwa zamachu", "isCorrect": true},
+            {"text": "tylko jeśli wyrazi skruchę", "isCorrect": false},
+            {"text": "tylko w przypadku pełni księżyca", "isCorrect": false}
+        ]
+    },
+    {
+        "question": "Kto nosi broń, naruszając ograniczenie lub wykluczenie możliwości jej noszenia określone przez właściwy organ Policji w pozwoleniu na broń, albo nosi broń, naruszając zakaz jej noszenia wprowadzony przez ministra właściwego do spraw wewnętrznych podlega karze:",
+        "select": -1,
+        "answers": [
+            {"text": "aresztu lub grzywny", "isCorrect": true},
+            {"text": "nagrodzie za odwagę", "isCorrect": false},
+            {"text": "śmiesznej minie", "isCorrect": false}
+        ]
+    },
+    {
+        "question": "Kto używa w celach szkoleniowych lub sportowych broni zdolnej do rażenia celów na odległość poza strzelnicami podlega karze:",
+        "select": -1,
+        "answers": [
+            {"text": "aresztu lub grzywny", "isCorrect": true},
+            {"text": "nagrodzie za najdłuższy rzut", "isCorrect": false},
+            {"text": "pozowaniu do zdjęć", "isCorrect": false}
+        ]
+    },
+    {
+        "question": "Kto przywozi na terytorium Rzeczypospolitej Polskiej z państwa nie będącego członkiem Unii Europejskiej broń lub amunicję bez wymaganego zaświadczenia właściwego konsula Rzeczypospolitej Polskiej lub nie dopełnia obowiązku pisemnego zgłoszenia przywozu broni i amunicji podlega karze:",
+        "select": -1,
+        "answers": [
+            {"text": "aresztu lub grzywny", "isCorrect": true},
+            {"text": "nagrodzie za kreatywność", "isCorrect": false},
+            {"text": "wizycie u znajomych", "isCorrect": false}
+        ]
+    }
+]

@@ -1,0 +1,92 @@
+[
+    {
+        "question": "Bronią używaną do strzelania konkurencji zatwierdzonych przez Międzynarodową Federację Sportu Strzeleckiego (ISSF) może być m.in. broń pneumatyczna przeznaczona do strzelania pociskami dowolnego rodzaju i kształtu o kalibrze 4,5 mm (.177\") wykonanymi ze stopu ołowiu, w tym:",
+        "select": -1,
+        "answers": [
+            {"text": "pistolety na sprężone powietrze lub CO2 o ciężarze nie przekraczającym 1500 g, oporze języka spustowego nie mniejszym niż 500 g, mieszczące się w pudełku w wewnętrznych wymiarach 420mm x 200mm x 50mm", "isCorrect": true},
+            {"text": "karabiny na sprężone powietrze lub CO2 o ciężarze nie przekraczającym 5500 g, dowolnym oporze języka spustowego, w których odległość od wylotu lufy do końca celownika nie przekracza 850 mm", "isCorrect": false},
+            {"text": "rewolwery na sprężone powietrze o ciężarze nie przekraczającym 1000 g, oporze języka spustowego nie mniejszym niż 300 g, mieszczące się w pudełku w wewnętrznych wymiarach 300mm x 150mm x 50mm", "isCorrect": false}
+        ]
+    },
+    {
+        "question": "Bronią używaną do strzelania konkurencji zatwierdzonych przez Międzynarodową Federację Sportu Strzeleckiego (ISSF) może być m.in. małokalibrowa broń palna bocznego zapłonu, w tym:",
+        "select": -1,
+        "answers": [
+            {"text": "pistolet dowolny to jest pistolet jednostrzałowy o kalibrze 5,6 mm (.22\"), o dowolnych wymiarach i ciężarze oraz o dowolnym oporze języka spustowego", "isCorrect": true},
+            {"text": "karabin sportowy o kalibrze 7,62 mm (.308\") z lufą o długości 600 mm i odległości między muszką a szczerbinką wynoszącą 850 mm", "isCorrect": false},
+            {"text": "rewolwer o kalibrze 9 mm (.357\") z lufą o długości 200 mm i odległości między muszką a szczerbinką wynoszącą 300 mm", "isCorrect": false}
+        ]
+    },
+    {
+        "question": "Bronią używaną do strzelania konkurencji zatwierdzonych przez Międzynarodową Federację Sportu Strzeleckiego (ISSF) może być m.in. małokalibrowa broń palna bocznego zapłonu, w tym:",
+        "select": -1,
+        "answers": [
+            {"text": "pistolet sportowy i pistolet standardowy, to jest pistolet i rewolwer o kalibrze 5,6 mm (.22\") przeznaczony do strzelania amunicją \"long rifle\", o ciężarze wraz z rozładowanym magazynkiem nie przekraczającym 1400 g, długości lufy nie przekraczającej 153 mm oraz odległości między muszką a szczerbinką nie większej niż 220 mm, oporze języka spustowego nie mniejszym niż 1000 g, mieszczące się w pudełku o wewnętrznych wymiarach 300 mm x 150 mm x 50 mm", "isCorrect": true},
+            {"text": "rewolwer i pistolet na amunicję hukową o kalibrze 9 mm (.380\") o dowolnych wymiarach, długości lufy nie większej niż 100 mm oraz oporze języka spustowego nie mniejszym niż 500 g", "isCorrect": false},
+            {"text": "karabin myśliwski o kalibrze 7,62 mm (.308\") z lufą o długości 500 mm i odległości między muszką a szczerbinką wynoszącą 800 mm", "isCorrect": false}
+        ]
+    },
+    {
+        "question": "Bronią używaną do strzelania konkurencji zatwierdzonych przez Międzynarodową Federację Sportu Strzeleckiego (ISSF) może być m.in. broń pneumatyczna przeznaczona do strzelania pociskami dowolnego rodzaju i kształtu o kalibrze 4,5 mm (.177\") wykonanymi ze stopu ołowiu, w tym:",
+        "select": -1,
+        "answers": [
+            {"text": "karabiny na sprężone powietrze lub CO2 o ciężarze nie przekraczającym 5500 g, dowolnym oporze języka spustowego, w których odległość od wylotu lufy do końca celownika nie przekracza 850 mm", "isCorrect": true},
+            {"text": "pistolety na sprężone powietrze lub CO2 o ciężarze nie przekraczającym 1500 g, oporze języka spustowego nie mniejszym niż 500 g, mieszczące się w pudełku w wewnętrznych wymiarach 420mm x 200mm x 50mm","isCorrect": false},
+            {"text": "rewolwery na sprężone powietrze o ciężarze nie przekraczającym 1000 g, oporze języka spustowego nie mniejszym niż 300 g, mieszczące się w pudełku w wewnętrznych wymiarach 300mm x 150mm x 50mm","isCorrect": false}
+        ]
+    },
+    {
+        "question": "Amunicją używaną do strzelania konkurencji zatwierdzonych przez Międzynarodową Federację Sportu Strzeleckiego (ISSF) może być między innymi:",
+        "select": -1,
+        "answers": [
+            {"text": "amunicja bocznego zapłonu o kalibrze 5,6 mm (.22'') \"long rifle\", której pociski są wykonane z ołowiu lub podobnego miękkiego materiału","isCorrect": true},
+            {"text": "amunicja centralnego zapłonu o kalibrze 9 mm (.357'') wykonana ze stali nierdzewnej","isCorrect": false},
+            {"text": "amunicja hukowa o kalibrze 12 mm (0.50'') z pociskami gumowymi","isCorrect": false}
+        ]
+    },
+    {
+        "question": "Bronią używaną do strzelania konkurencji zatwierdzonych przez Międzynarodową Federację Sportu Strzeleckiego (ISSF) może być m.in. małokalibrowa broń palna bocznego zapłonu, w tym:",
+        "select": -1,
+        "answers": [
+            {"text": "karabin dowolny, to jest karabin jednostrzałowy o kalibrze 5,6 mm (.22\") przeznaczony do strzelania amunicją \"long rifle\", o ciężarze nie przekraczającym 8000 g oraz dowolnym oporze języka spustowego","isCorrect": true},
+            {"text": "karabin automatyczny o kalibrze 7,62 mm (.308'') z możliwością prowadzenia ognia ciągłego","isCorrect": false},
+            {"text": "karabin powtarzalny o kalibrze 6,5 mm (.264'') z lufą gwintowaną","isCorrect": false}
+        ]
+    },
+    {
+        "question": "Bronią używaną do strzelania konkurencji zatwierdzonych przez Międzynarodową Federację Sportu Strzeleckiego (ISSF) może być m.in. małokalibrowa broń palna bocznego zapłonu, w tym:",
+        "select": -1,
+        "answers": [
+            {"text": "pistolet dowolny, to jest pistolet jednostrzałowy o kalibrze 5,6 mm (.22\") o dowolnych wymiarach i ciężarze oraz dowolnym oporze języka spustowego","isCorrect": true},
+            {"text": "pistolet automatyczny o kalibrze 9 mm (.357\") z możliwością prowadzenia ognia ciągłego","isCorrect": false},
+            {"text": "rewolwer o kalibrze 7,62 mm (.308\") z lufą o długości 200 mm i odległości między muszką a szczerbinką wynoszącą 300 mm","isCorrect": false}
+        ]
+    },
+    {
+        "question": "Bronią używaną do strzelania konkurencji zatwierdzonych przez Międzynarodową Federację Sportu Strzeleckiego (ISSF) może być m.in. broń palna centralnego zapłonu, w tym:",
+        "select": -1,
+        "answers": [
+            {"text": "pistolet centralnego zapłonu, to jest pistolet i rewolwer o kalibrze od 7,62 mm (.30'') do 9,65 mm (0.38\"), o ciężarze wraz z rozładowanym magazynkiem nie przekraczającym 1400 g, o oporze języka spustowego nie mniejszym niż 1000 g, długości lufy nie przekraczającej 153 mm oraz odległości między muszką a szczerbinką nie większej niż 220 mm, mieszczący się w pudełku o wewnętrznych wymiarach 300 mm x 150 mm x 50 mm","isCorrect": true},
+            {"text": "karabin automatyczny o kalibrze 5,56 mm (.223\") z możliwością prowadzenia ognia ciągłego","isCorrect": false},
+            {"text": "karabin snajperski o kalibrze 12,7 mm (.50\") z celownikiem noktowizyjnym","isCorrect": false}
+        ]
+    },
+    {
+        "question": "Bronią używaną do strzelania konkurencji zatwierdzonych przez Międzynarodową Federację Sportu Strzeleckiego (ISSF) może być m.in. broń palna centralnego zapłonu, w tym:",
+        "select": -1,
+        "answers": [
+            {"text": "karabin dowolny centralnego zapłonu, to jest karabin o kalibrze nie przekraczającym 8 mm (0.315\"), dowolnym oporze języka spustowego, ciężarze całkowitym nie przekraczającym 8000 g","isCorrect": true},
+            {"text": "pistolet maszynowy o kalibrze 9 mm (.380\") z możliwością prowadzenia ognia ciągłego","isCorrect": false},
+            {"text": "karabin powtarzalny o kalibrze 6,5 mm (.264\") z lufą gwintowaną","isCorrect": false}
+        ]
+    },
+    {
+        "question": "Bronią używaną do strzelania konkurencji zatwierdzonych przez Międzynarodową Federację Sportu Strzeleckiego (ISSF) może być między innymi:",
+        "select": -1,
+        "answers": [
+            {"text": "gładkolufowa broń śrutowa, to jest strzelba o kalibrze wagomiarowym nie większym niż 12, z komorą nabojową o długości do 76 mm","isCorrect": true},
+            {"text": "karabin snajperski o kalibrze 7,62 mm (.308\") z celownikiem noktowizyjnym","isCorrect": false},
+            {"text": "karabin automatyczny o kalibrze 5,56 mm (.223\") z możliwością prowadzenia ognia ciągłego","isCorrect": false}
+        ]
+    }
+]
