@@ -19,8 +19,11 @@ class Auth {
       email: email,
       password: password,
     );
-    await user.user!.sendEmailVerification();
     return user;
+  }
+
+  Future<void> sendVerificationEmail(UserCredential user) async {
+    await user.user!.sendEmailVerification();
   }
 
   Future<void> signOut() async {

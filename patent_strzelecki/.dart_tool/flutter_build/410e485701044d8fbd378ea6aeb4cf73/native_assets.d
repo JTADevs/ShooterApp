@@ -1,0 +1,1 @@
+ C:\\Users\\jakub\\Desktop\\ShooterApp\\patent_strzelecki\\.dart_tool\\flutter_build\\410e485701044d8fbd378ea6aeb4cf73\\native_assets.yaml: 

@@ -33,18 +33,18 @@ class _QuestionPageState extends State<QuestionPage> {
           List<Color> gradientColors;
           if (index % 3 == 0) {
             gradientColors = [
-              Color.fromARGB(255, 33, 30, 30)!,
-              Color.fromARGB(255, 87, 80, 80)!
+              Color.fromARGB(255, 33, 30, 30),
+              Color.fromARGB(255, 87, 80, 80)
             ];
           } else if (index % 3 == 1) {
             gradientColors = [
-              Color.fromARGB(255, 78, 99, 69)!,
-              Color.fromARGB(255, 70, 70, 69)!
+              Color.fromARGB(255, 78, 99, 69),
+              Color.fromARGB(255, 70, 70, 69)
             ];
           } else {
             gradientColors = [
-              Color.fromARGB(255, 18, 35, 14)!,
-              Color.fromARGB(255, 123, 142, 121)!
+              Color.fromARGB(255, 18, 35, 14),
+              Color.fromARGB(255, 123, 142, 121)
             ];
           }
 

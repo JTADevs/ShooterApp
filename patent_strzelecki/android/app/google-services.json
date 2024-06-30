@@ -9,7 +9,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:91848892001:android:a40fc838dc2f76d1d21420",
         "android_client_info": {
-          "package_name": "com.example.patent_strzelecki"
+          "package_name": "com.jtadevs.patent_strzelecki"
         }
       },
       "oauth_client": [
@@ -17,7 +17,7 @@
           "client_id": "91848892001-ide3k8h1afdc0g1p9ljrqe8k18bn2k5v.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.patent_strzelecki",
+            "package_name": "com.jtadevs.patent_strzelecki",
             "certificate_hash": "96335b06b982e13fd33e8f9ef286d25df8a9392f"
           }
         },

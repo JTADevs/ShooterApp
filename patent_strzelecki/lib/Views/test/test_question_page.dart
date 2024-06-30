@@ -16,7 +16,7 @@ class _TestQuestionsPageState extends State<TestQuestionsPage> {
   int _currentQuestionIndex = 0;
   int _remainingTime = 20 * 60;
   Timer? _timer;
-  int _correctAnswers = 0;
+  //int _correctAnswers = 0;
   PageController _pageController = PageController();
 
   @override

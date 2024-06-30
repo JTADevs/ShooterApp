@@ -49,6 +49,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
       } else {
         userCredential =
             await _auth.signUp(_emailController.text, _passwordController.text);
+        _auth.sendVerificationEmail(userCredential);
         final SharedPreferences prefs = await SharedPreferences.getInstance();
         await prefs.setBool('isFirstLogin', true);
 
